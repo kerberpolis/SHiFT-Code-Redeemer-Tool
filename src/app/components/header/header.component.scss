@@ -1,14 +1,15 @@
 @import "src/assets/scss/variables";
 
-:host {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  line-height: 4em;
-  background-color:  $color_background_secondary;
-  box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.37);
-  min-height: 4em;
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    line-height: 4em;
+    background-color:  $colour_secondary;
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.37);
+    min-height: 4em;
+  
 }
 
 .logo-container {
@@ -25,13 +26,20 @@
   width: 60%;
   display: flex;
   justify-content: right;
-
-  a {
-      padding: 0px 30px;
-  }
 }
-
 
 .active-link {
   color: $active_link_color;
+}
+
+.header a {
+    padding: 0px 30px;
+    color: #000000;
+    text-decoration: none;
+}
+
+.links-container a:hover {
+    font-weight: bold;
+    background-color:  $colour_primary;
+
 }
