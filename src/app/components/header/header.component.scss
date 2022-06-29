@@ -1,0 +1,37 @@
+@import "src/assets/scss/variables";
+
+:host {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  line-height: 4em;
+  background-color:  $color_background_secondary;
+  box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.37);
+  min-height: 4em;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  .mat-button {
+    font-weight: bold;
+    font-size: 1em;
+  }
+}
+
+.links-container {
+  width: 60%;
+  display: flex;
+  justify-content: right;
+
+  a {
+      padding: 0px 30px;
+  }
+}
+
+
+.active-link {
+  color: $active_link_color;
+}
