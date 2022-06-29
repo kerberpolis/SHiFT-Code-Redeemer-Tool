@@ -8,18 +8,25 @@ import { CodeListComponent } from './components/code-list/code-list.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { UserGameListComponent } from './components/user-game-list/user-game-list.component';
+import { UserGameListComponent } from './components/user-game/user-game-list/user-game-list.component';
 import { HeaderComponent } from './components/header/header.component';
+import { UserGameComponent } from './components/user-game/user-game.component';
+import { UserGameFormComponent } from './components/user-game/user-game-form/user-game-form.component'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     CodeListComponent,
     UserGameListComponent,
-    HeaderComponent
+    UserGameFormComponent,
+    HeaderComponent,
+    UserGameComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
