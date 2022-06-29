@@ -8,11 +8,13 @@ import { CodeListComponent } from './components/code-list/code-list.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { UserGameListComponent } from './components/user-game-list/user-game-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CodeListComponent
+    CodeListComponent,
+    UserGameListComponent
   ],
   imports: [
     BrowserModule,
