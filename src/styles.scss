@@ -1,1 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+@use '@material/layout-grid/mdc-layout-grid';
+
+@import '@material/layout-grid/mdc-layout-grid.scss';
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+}
+
+:root {
+  --mdc-layout-grid-margin-desktop: 30px 50px;
+  --mdc-layout-grid-gutter-desktop: 30px;
+}
