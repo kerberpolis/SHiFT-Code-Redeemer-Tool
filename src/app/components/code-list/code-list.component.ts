@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { CodeService } from '../../services/code.service'
-import { Code } from '../../models/code'
 import { ApiResponse } from '../../models/apiResponse'
 
 import { MatPaginator } from '@angular/material/paginator';
