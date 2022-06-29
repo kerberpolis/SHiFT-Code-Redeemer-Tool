@@ -18,17 +18,17 @@ export class UserGameService {
 
   /** GET all codes */
   getUserGames(): Observable<any>{
-    return this.http.get<ApiResponse>(`${this.baseUrl}/user/1/games`);
+    return this.http.get<ApiResponse>(`${this.baseUrl}/user_games/1`);
   }
 
   /** POST: add a user game to the database */
   addUserGame(userGame: UserGame): Observable<UserGame> {
-    return this.http.post<UserGame>(`${this.baseUrl}/user/${userGame.user_id}/games`,
+    return this.http.post<UserGame>(`${this.baseUrl}/user_games`,
                                     userGame, this.httpOptions);
   }
 
   /** DELETE: remove a user game from the database */
   deleteUserGame(userGameId: number): Observable<unknown> {
-    return this.http.delete(`${this.baseUrl}/games/${userGameId}`, this.httpOptions);
+    return this.http.delete(`${this.baseUrl}/user_games/${userGameId}`, this.httpOptions);
   }
 }
