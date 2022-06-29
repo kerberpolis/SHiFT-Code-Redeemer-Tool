@@ -1,0 +1,20 @@
+
+.codes-info {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+// #e7820b	(231,130,11)
+// #87674a	(135,103,74)
+// #dcccb3	(220,204,179)
+// #11cccf	(17,204,207)
+// #3a2114	(58,33,20)
+
+#codes-table {
+width: 100%;
+}
+
+.mat-row::nth-child(odd){
+background:gray;
+color: #fff;
+}
