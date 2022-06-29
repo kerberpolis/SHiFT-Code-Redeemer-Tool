@@ -1,0 +1,27 @@
+<form [formGroup]="userGameForm" (ngSubmit)="onSubmit()">
+    <input type="hidden" formControlName="user_id" [ngModel]="1">
+
+    <div class="form-group">
+      <label for="game">Game:</label>
+      <div class='radio' *ngFor="let item of games">
+        <label for="game">
+          <input id="item" [value]='item' type="radio" formControlName="game" [(ngModel)]="game">
+          {{item}}
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+        <label for="platforms">Platform:</label>
+        <select class="form-control" id="platforms" required [(ngModel)]="platform" formControlName="platform">
+          <option value="" selected>Please select a platform</option>
+          <option *ngFor="let platform of platforms" [value]="platform">{{platform}}</option>
+        </select>
+    </div>
+
+    <p>
+      <button type="submit" class="btn btn-primary" [disabled]="!userGameForm.valid">Submit</button>
+    </p>
+</form>
+      
+
