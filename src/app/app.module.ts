@@ -13,6 +13,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { UserGameComponent } from './components/user-game/user-game.component';
 import { UserGameFormComponent } from './components/user-game/user-game-form/user-game-form.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserCodeListComponent } from './components/user-code-list/user-code-list.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     UserGameFormComponent,
     HeaderComponent,
     UserGameComponent,
+    UserCodeListComponent,
   ],
   imports: [
     BrowserModule,

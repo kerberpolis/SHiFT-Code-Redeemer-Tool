@@ -1,0 +1,34 @@
+<h2>User Codes</h2>
+ 
+<div class="codes-container">
+  <div class="codes-info">
+    <span>
+      <p>{{userCodes.data.length > 0 ? userCodes.data?.length : 0}} codes redeemed</p>
+    </span>
+  </div>
+  <table id="codes-table" mat-table [dataSource]="userCodes" class="mat-elevation-z8 base-table">
+    <ng-container matColumnDef="game">
+      <th mat-header-cell *matHeaderCellDef> Game </th>
+      <td mat-cell *matCellDef="let code">{{code.game}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="platform">
+      <th mat-header-cell *matHeaderCellDef> Platform </th>
+      <td mat-cell *matCellDef="let code"> {{code.platform}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="code">
+      <th mat-header-cell *matHeaderCellDef> Code </th>
+      <td mat-cell *matCellDef="let code"> {{code.code}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="reward">
+      <th mat-header-cell *matHeaderCellDef> Reward </th>
+      <td mat-cell *matCellDef="let code"> {{code.reward}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="userCodeColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: userCodeColumns;"></tr>
+  </table>
+  <mat-paginator [length]="userCodes.data.length" [pageSize]="10" [pageSizeOptions]="[10, 25, 50, 100]"></mat-paginator>
+</div>
