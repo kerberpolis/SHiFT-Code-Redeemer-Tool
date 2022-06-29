@@ -9,12 +9,14 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { UserGameListComponent } from './components/user-game-list/user-game-list.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CodeListComponent,
-    UserGameListComponent
+    UserGameListComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
