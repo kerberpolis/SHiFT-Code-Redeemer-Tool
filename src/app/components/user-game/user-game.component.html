@@ -1,2 +1,52 @@
-<app-user-game-list></app-user-game-list>
-<app-user-game-form></app-user-game-form>
+<h2>User Games</h2>
+
+<div class="user-games-container">
+    <table id="user-games-table" mat-table [dataSource]="userGames" class="mat-elevation-z8 base-table">
+    <ng-container matColumnDef="game">
+        <th mat-header-cell *matHeaderCellDef> Game </th>
+        <td mat-cell *matCellDef="let userGame">{{userGame.game}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="platform">
+        <th mat-header-cell *matHeaderCellDef> Platform </th>
+        <td mat-cell *matCellDef="let userGame"> {{userGame.platform}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="_id">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let userGame; let i = index">
+            <button mat-button (click)="deleteUserGame(i, userGame._id)" class="btn btn-primary">X</button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="userGameColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: userGameColumns;"></tr>
+    </table>
+</div>
+
+
+<form [formGroup]="userGameForm" (ngSubmit)="onSubmit()">
+    <input type="hidden" formControlName="user_id" [ngModel]="user._id">
+
+    <div class="form-group">
+        <label for="game">Game:</label>
+        <div class='radio' *ngFor="let item of games">
+        <label for="game">
+            <input id="item" [value]='item' type="radio" formControlName="game" [(ngModel)]="game">
+            {{item}}
+        </label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="platforms">Platform:</label>
+        <select class="form-control" id="platforms" required [(ngModel)]="platform" formControlName="platform">
+            <option value="" selected>Please select a platform</option>
+            <option *ngFor="let platform of platforms" [value]="platform">{{platform}}</option>
+        </select>
+    </div>
+
+    <p>
+        <button type="submit" class="btn btn-primary" [disabled]="!userGameForm.valid">Submit</button>
+    </p>
+</form>

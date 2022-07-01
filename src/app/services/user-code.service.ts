@@ -16,8 +16,8 @@ export class UserCodeService {
   };
 
   /** GET all codes redeemed by user */
-  getUserCodes(): Observable<any>{
-    return this.http.get<ApiResponse>(`${this.baseUrl}/user/1/codes`);
+  getUserCodes(user_id: string): Observable<any>{
+    return this.http.get<ApiResponse>(`${this.baseUrl}/user/${user_id}/codes`);
   }
 
 }
