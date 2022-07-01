@@ -4,27 +4,13 @@
   </div>
   
   <div class="links-container">
-    <div *ngIf="user">
-        <a mat-button routerLink="/codes" routerLinkActive="active-link">Codes</a>
-        <a mat-button routerLink="/games" routerLinkActive="active-link">Games</a>  
-    </div>
-
-    <a mat-button disabled="true">About</a>
+    <a *ngIf="user" mat-button routerLink="/codes" routerLinkActive="active-link">Codes</a>
+    <a *ngIf="user" mat-button routerLink="/games" routerLinkActive="active-link">Games</a>  
+    <a mat-button [disabled]="true">About</a>
     <a *ngIf="!user" mat-button routerLink="/login" routerLinkActive="active-link">Login</a>
-
-    <div *ngIf="user">
-      Hello {{user.email}}!
-        <a mat-button (click)='logout()' routerLinkActive="active-link">Logout</a>
-    </div>
-  </div>
+    <button *ngIf="user" mat-button [matMenuTriggerFor]="menu">Hello {{user.email}}!</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item [disabled]='true'>Account</button>
+      <button mat-menu-item (click)="logout()">Logout</button>
+    </mat-menu>      
 </div>
-<!-- <mat-toolbar color="primary">
-    <span>
-      SHiFT Redeemer
-    </span>
-    <span class="fill-remaining-space"></span>
-    <button mat-button routerLink="/codes" routerLinkActive="active-link">Codes</button>
-    <button mat-button routerLink="/codes" routerLinkActive="active-link">Games</button>
-    <button mat-button routerLink="/login" routerLinkActive="active-link">Login</button>
-    <button mat-button (click)="logout()">Logout</button>
-  </mat-toolbar> -->
