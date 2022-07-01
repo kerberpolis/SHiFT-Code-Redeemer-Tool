@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @use '@material/layout-grid/mdc-layout-grid';
 
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import '@material/layout-grid/mdc-layout-grid.scss';
 @import '@fortawesome/fontawesome-free/css/all.min.css';
 

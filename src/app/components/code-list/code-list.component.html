@@ -6,7 +6,7 @@
       <p>{{codes.data.length > 0 ? codes.data?.length : 0}} codes available</p>
     </span>
   </div>
-  <table id="codes-table" mat-table [dataSource]="codes" class="mat-elevation-z8 base-table">
+  <table id="codes-table" mat-table [dataSource]="codes" class="table mat-elevation-z8 base-table">
     <ng-container matColumnDef="game">
       <th mat-header-cell *matHeaderCellDef> Game </th>
       <td mat-cell *matCellDef="let code">{{code.game}} </td>
