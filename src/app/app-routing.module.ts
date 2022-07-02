@@ -6,6 +6,7 @@ import { UserCodeListComponent } from './components/user-code-list/user-code-lis
 import { LoginComponent } from './components/account/login/login.component'
 import { AuthService } from './services/auth.service';
 import { RegisterComponent } from './components/account/register/register.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
   { path: '', component: CodeListComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'games', component: UserGameComponent, canActivate:[AuthService] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'profile', component: ProfileComponent, canActivate:[AuthService] },
 
 ];
 
