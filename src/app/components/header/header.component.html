@@ -10,7 +10,7 @@
     <a *ngIf="!user" mat-button routerLink="/login" routerLinkActive="active-link">Login</a>
     <button *ngIf="user" mat-button [matMenuTriggerFor]="menu">Hello {{user.email}}!</button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item [disabled]='true'>Account</button>
+      <button mat-menu-item [disabled]='true'>Profile</button>
       <button mat-menu-item (click)="logout()">Logout</button>
     </mat-menu>      
 </div>
