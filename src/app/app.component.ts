@@ -15,7 +15,7 @@ export class AppComponent {
     // on route change to '/login', set the variable showHead to false to hide header
     router.events.forEach((event: any) => {
       if (event instanceof NavigationStart) {
-        if (event['url'] == '/login') {
+        if (['/login', '/register'].includes(event['url'])) {
           this.showHead = false;
         } else {
           this.showHead = true;
