@@ -26,10 +26,24 @@
     <div *ngIf="f['gearbox_email'].touched && f['gearbox_email'].invalid" class="alert alert-danger">
         <small *ngIf="f['gearbox_email'].errors?.['email']">Email is not valid.</small>
     </div>
+    <div *ngIf="f['gearbox_email'].touched && f['gearbox_email'].dirty" class="alert alert-danger">
+        <small>Enter email to verify.</small>
+    </div>
 
     <mat-form-field appearance="fill">
         <input matInput placeholder="Gearbox password" type="text" formControlName="gearbox_password">
     </mat-form-field>
+    <div *ngIf="f['gearbox_password'].touched && f['gearbox_password'].dirty" class="alert alert-danger">
+        <small>Enter password to verify.</small>
+    </div>
+
+
+    <button type="button" [ngClass]="validateSuccess != null ? validateSuccess ? 'button-success' : 'button-failure' : ''" mat-raised-button (click)='verifyGearbox()' [disabled]='gearboxFormValid === true'>
+        {{ validateSuccess != null ? validateSuccess ? 'Verified!' : 'Invalid Gearbox details' : 'Verify' }}
+        <mat-icon>
+            <mat-spinner *ngIf='gearboxSubmitted' diameter="20"></mat-spinner>
+        </mat-icon>
+    </button>
 
     <div class='button-container'>
         <button mat-button type="button" (click)='back()' class="btn btn-primary">Back</button>

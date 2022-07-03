@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/user';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { GearboxData } from '../models/gearboxData';
 
 
 @Injectable({
@@ -69,14 +70,12 @@ export class AuthService {
     return this.http.get<User>('http://localhost:8080/borderlands-code-crawler/v1/user', request_options);
   }
 
-  register(user: User): Observable<any> {
-    const data = new HttpParams()
-      .set('email', user.email)
-      .set('password', user.password)
-      .set('gearbox_email', user.gearbox_email)
-      .set('gearbox_password', user.gearbox_password);
-    
-    return this.http.post('http://localhost:8080/borderlands-code-crawler/v1/register', data, this.httpOptions);
+  register(userData: User): Observable<any> {
+    return this.http.post('http://localhost:8080/borderlands-code-crawler/v1/register', userData, this.httpOptions);
+  }
+
+  verifyGearbox(gearboxData: GearboxData): Observable<any> {
+    return this.http.post('http://localhost:8080/borderlands-code-crawler/v1/verify_gearbox', gearboxData, this.httpOptions);
   }
 
   logout(): void {
