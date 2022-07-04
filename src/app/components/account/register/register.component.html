@@ -1,52 +1,88 @@
-<h2><span class="give-me-space" style="text-align: center;">Register</span></h2>
-<form id='register' class="align-middle" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    
-    <mat-form-field appearance="fill">
-      <!-- <mat-label>Email</mat-label> -->
-      <input matInput placeholder="Email" formControlName="email">
-      <!-- <mat-icon matSuffix>email</mat-icon> -->
-      <!-- <mat-hint>Hint</mat-hint> -->
-    </mat-form-field>
-    <div *ngIf="f['email'].touched && f['email'].invalid" class="alert alert-danger">
-        <small *ngIf="f['email'].errors?.['required']">Email is required.</small>
-        <small *ngIf="f['email'].errors?.['email']">Email is not valid.</small>
-    </div>
+<mat-card>
+    <mat-card-content>    
+        <form id='register' class="align-middle" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <h2>Register</h2>
 
-    <mat-form-field appearance="fill">
-      <input matInput placeholder="Password" type="password" formControlName="password">
-    </mat-form-field>
-    <div *ngIf="f['password'].touched && f['password'].invalid" class="alert alert-danger">
-        <small *ngIf="f['password'].errors?.['required']">Password is required.</small>
-        <small *ngIf="f['password'].errors?.['minlength']">Password must be {{f['password'].errors?.['minlength'].requiredLength}} characters.</small>
-    </div>
+            <div class='form-row'>
+                <h4>User Details:</h4>
+                <div *ngIf="registerForm.errors?.['invalidUser']" class="alert alert-danger">
+                    User already exists! 
+                </div>
+                
+                <div class="form-group-wrapper">
+                    <!-- User Email -->
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Email:</mat-label>
+                            <input matInput placeholder="Email" formControlName="email">
+                        </mat-form-field>
+                        <div *ngIf="f['email'].touched && f['email'].invalid" class="alert alert-danger">
+                            <small *ngIf="f['email'].errors?.['required']">Email is required.</small>
+                            <small *ngIf="f['email'].errors?.['email']">Email is not valid.</small>
+                        </div>
+                    </div>
+                    
+                    <!-- User Password -->
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Passowrd:</mat-label>
+                            <input matInput placeholder="Password" type="password" formControlName="password">
+                        </mat-form-field>
+                        <div *ngIf="f['password'].touched && f['password'].invalid" class="alert alert-danger">
+                            <small *ngIf="f['password'].errors?.['required']">Password is required.</small>
+                            <small *ngIf="f['password'].errors?.['minlength']">Password must be {{f['password'].errors?.['minlength'].requiredLength}} characters.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-    <mat-form-field appearance="fill">
-        <input matInput placeholder="Gearbox email" type="text" formControlName="gearbox_email">
-    </mat-form-field>
-    <div *ngIf="f['gearbox_email'].touched && f['gearbox_email'].invalid" class="alert alert-danger">
-        <small *ngIf="f['gearbox_email'].errors?.['email']">Email is not valid.</small>
-    </div>
-    <div *ngIf="f['gearbox_email'].touched && f['gearbox_email'].dirty" class="alert alert-danger">
-        <small>Enter email to verify.</small>
-    </div>
 
-    <mat-form-field appearance="fill">
-        <input matInput placeholder="Gearbox password" type="text" formControlName="gearbox_password">
-    </mat-form-field>
-    <div *ngIf="f['gearbox_password'].touched && f['gearbox_password'].dirty" class="alert alert-danger">
-        <small>Enter password to verify.</small>
-    </div>
+            <div class='form-row'>
+                <h4>Gearbox Details:</h4>
+                <div *ngIf="registerForm.errors?.['unverifiedGearbox']" class="alert alert-danger">
+                    Gearbox account not verified! 
+                </div>
+
+                <div class="form-group-wrapper">
+                    <!-- Gearbox Email -->
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Gearbox Email:</mat-label>
+                            <input matInput placeholder="Gearbox email" type="text" formControlName="gearbox_email">
+                        </mat-form-field>
+                        <div *ngIf="f['gearbox_email'].touched && f['gearbox_email'].invalid" class="alert alert-danger">
+                            <small *ngIf="f['gearbox_email'].errors?.['email']">Email is not valid.</small>
+                        </div>
+                        <div *ngIf="f['gearbox_email'].touched && f['gearbox_email'].dirty" class="alert alert-danger">
+                            <small>Enter email to verify.</small>
+                        </div>
+                    </div>
+                    
+                    <!-- Gearbox Password -->
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Geabox Passowrd:</mat-label>
+                            <input matInput placeholder="Gearbox password" type="password" formControlName="gearbox_password">
+                        </mat-form-field>
+                        <div *ngIf="f['gearbox_password'].touched && f['gearbox_password'].dirty" class="alert alert-danger">
+                            <small>Enter password to verify.</small>
+                        </div>
+                    </div>
+
+                    <button id='verify-gearbox' mat-raised-button type="button" color="primary" [ngClass]="gearboxValidateSuccess != null ? gearboxValidateSuccess ? 'button-success' : 'button-failure' : ''" (click)='verifyGearbox()' [disabled]='gearboxFormValid === true'>
+                        {{ gearboxValidateSuccess != null ? gearboxValidateSuccess ? 'Verified!' : 'Invalid!' : 'Verify' }}
+                        <mat-spinner *ngIf='gearboxSubmitted'diameter="20"></mat-spinner>
+                    </button>
+                </div>
 
 
-    <button type="button" [ngClass]="validateSuccess != null ? validateSuccess ? 'button-success' : 'button-failure' : ''" mat-raised-button (click)='verifyGearbox()' [disabled]='gearboxFormValid === true'>
-        {{ validateSuccess != null ? validateSuccess ? 'Verified!' : 'Invalid Gearbox details' : 'Verify' }}
-        <mat-icon>
-            <mat-spinner *ngIf='gearboxSubmitted' diameter="20"></mat-spinner>
-        </mat-icon>
-    </button>
+            
+            </div>
 
-    <div class='button-container'>
-        <button mat-button type="button" (click)='back()' class="btn btn-primary">Back</button>
-        <button mat-button type="submit" form="register" class="btn btn-primary" [disabled]="!registerForm.valid">Register</button>
-    </div>
-</form>
+            <div class='button-container'>
+                <button mat-raised-button type="button" color="primary" (click)='back()' class="btn btn-primary">Back</button>
+                <button mat-raised-button type="submit" color="primary" form="register" class="btn btn-primary">Register</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

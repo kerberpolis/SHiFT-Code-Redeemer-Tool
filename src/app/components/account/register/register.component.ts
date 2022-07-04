@@ -10,9 +10,9 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  gearboxSubmitted: boolean = false;
-  gearboxFormValid: boolean = true;
-  validateSuccess: any = null;
+  gearboxSubmitted: boolean = false;  // used to show the spinning icon while gearbox details are being verified.
+  gearboxFormValid: boolean = true;  // checks if gearbox details in form are valid
+  gearboxValidateSuccess: boolean | null = null;  // check if gearbox account exists
   registerForm: FormGroup;
 
   constructor(private authService: AuthService, private router: Router,
@@ -38,6 +38,8 @@ export class RegisterComponent implements OnInit {
   }
 
   checkGearboxValid() {
+    this.gearboxValidateSuccess = null;  // set verify button to default
+
     if(this.registerForm.get('gearbox_email')!.valid && !this.registerForm.get('gearbox_email')!.dirty
       && this.registerForm.get('gearbox_password')!.valid && !this.registerForm.get('gearbox_password')!.dirty
       && this.registerForm.get('gearbox_email')!.value && this.registerForm.get('gearbox_password')!.value){
@@ -51,33 +53,35 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.controls;
   }
 
-
-
   async onSubmit() {
-    if (this.registerForm.valid){  
-      if(((this.registerForm.get('gearbox_email')!.value && this.registerForm.get('gearbox_password')!.value) && this.validateSuccess) ||
-      (!this.registerForm.get('gearbox_email')!.value && !this.registerForm.get('gearbox_password')!.value)){
-        // check if both gearbox password and email are present or both not present
-        this.authService.register(this.registerForm.value).subscribe((data: any) => {
-            console.log(data);
-        });
-        this.router.navigateByUrl('');
-      }
+    if (this.registerForm.valid){
+      if ((this.registerForm.get('gearbox_email')!.value || this.registerForm.get('gearbox_password')!.value) && !this.gearboxValidateSuccess){
+          // if gearbox values are present but details are not verified, display error message 'account not verified'
+          this.registerForm.setErrors({ unverifiedGearbox : true });
+          return
+      }  
+     
+      // check if both gearbox password and email are present or both not present
+      this.authService.register(this.registerForm.value).subscribe(
+        (response: any) => {
+            this.router.navigateByUrl('');
+        },
+        (error: any) => {
+          this.registerForm.setErrors({ invalidUser: true });
+        }      
+      );       
     }
   }
 
   canVerify() {
     if (!this.registerForm.get('gearbox_email')!.valid && this.registerForm.get('gearbox_email')!.dirty &&
-    this.registerForm.get('gearbox_password')!.dirty) { 
+    this.registerForm.get('gearbox_password')!.dirty)
       return false
-    }
     return true
   }
 
   verifyGearbox() {
-    // set button to default
-    this.validateSuccess = null;
-
+    this.gearboxValidateSuccess = null;  // set verify button to default
 
     // if either gearbox inputs are empty, set as dirty/touched to display errer msg
     if (!this.registerForm.get('gearbox_email')!.value){
@@ -98,16 +102,15 @@ export class RegisterComponent implements OnInit {
         'gearbox_password': this.registerForm.get('gearbox_password')!.value
       }
 
-      this.gearboxSubmitted = true;
-
+      this.gearboxSubmitted = true;  // show spinner
       this.authService.verifyGearbox(gearboxData).subscribe((data: any) => {
-        this.gearboxSubmitted = false;
+        this.gearboxSubmitted = false;  // hide spinner
         if(data){
           // make button green
-          this.validateSuccess = true
+          this.gearboxValidateSuccess = true
         }else{
           // make button red
-          this.validateSuccess = false
+          this.gearboxValidateSuccess = false
         }
       });
     }

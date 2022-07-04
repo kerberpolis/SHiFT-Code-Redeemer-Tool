@@ -22,6 +22,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { RegisterComponent } from './components/account/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { MatCardModule } from '@angular/material/card';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
     BrowserAnimationsModule,
     MatMenuModule,
     AppRoutingModule,
+    MatCardModule,
     HttpClientModule,
     MatToolbarModule,
     MatIconModule,

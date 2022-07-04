@@ -11,7 +11,7 @@ import { Location } from '@angular/common'
 })
 export class LoginComponent {
   public loginForm: FormGroup 
-  
+
   constructor(private authService: AuthService, private router: Router, private location: Location) { 
     // redirect to home if already logged in
     if (this.authService.userSubject.value) { 
@@ -22,19 +22,31 @@ export class LoginComponent {
       email: new FormControl(null, [Validators.required]),
       password: new FormControl(null, [Validators.required]),
     });
-
   }
 
-  async onSubmit() {
-    this.authService.setToken(this.loginForm.value).subscribe(async (token: any) => {
-        localStorage.setItem(AuthService.TOKEN_STORAGE_KEY, JSON.stringify(token));
-        await this.authService.setCurrentUser().subscribe((user: any) => {
-          localStorage.setItem(AuthService.AUTH_STORAGE_KEY, JSON.stringify(user));
-          this.authService.userSubject.next(user);
-        });
-    });
+  get f() {
+    return this.loginForm.controls;
+  }
 
-    this.router.navigateByUrl('');
+  onSubmit() {
+    if(this.loginForm.valid){
+      this.authService.setToken(this.loginForm.value).subscribe(
+        (response: any) => {
+          localStorage.setItem(AuthService.TOKEN_STORAGE_KEY, JSON.stringify(response));
+          this.authService.setCurrentUser().subscribe((user: any) => {
+            localStorage.setItem(AuthService.AUTH_STORAGE_KEY, JSON.stringify(user));
+            this.authService.userSubject.next(user);
+            if (this.authService.userSubject.value)
+              this.router.navigate(['/']);
+          });
+        },
+        (error: any) => {
+          if (error.status === 401) {
+            this.loginForm.setErrors({ unauthorised: true });
+          }
+        }        
+      );
+    }
   }
 
   back(): void {
