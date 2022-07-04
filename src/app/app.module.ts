@@ -21,6 +21,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { RegisterComponent } from './components/account/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { MatCardModule } from '@angular/material/card';
+
 
 @NgModule({
   declarations: [
@@ -42,9 +45,11 @@ import { ProfileComponent } from './components/profile/profile.component';
     BrowserAnimationsModule,
     MatMenuModule,
     AppRoutingModule,
+    MatCardModule,
     HttpClientModule,
     MatToolbarModule,
     MatIconModule,
+    MatProgressSpinnerModule,
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
