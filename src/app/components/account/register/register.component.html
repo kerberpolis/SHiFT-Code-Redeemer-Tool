@@ -13,8 +13,8 @@
                     <!-- User Email -->
                     <div class="form-group">
                         <mat-form-field appearance="fill">
-                            <mat-label>Email:</mat-label>
-                            <input matInput placeholder="Email" formControlName="email">
+                            <mat-label>Email</mat-label>
+                            <input matInput formControlName="email">
                         </mat-form-field>
                         <div *ngIf="f['email'].touched && f['email'].invalid" class="alert alert-danger">
                             <small *ngIf="f['email'].errors?.['required']">Email is required.</small>
@@ -25,8 +25,8 @@
                     <!-- User Password -->
                     <div class="form-group">
                         <mat-form-field appearance="fill">
-                            <mat-label>Passowrd:</mat-label>
-                            <input matInput placeholder="Password" type="password" formControlName="password">
+                            <mat-label>Password</mat-label>
+                            <input matInput type="password" formControlName="password">
                         </mat-form-field>
                         <div *ngIf="f['password'].touched && f['password'].invalid" class="alert alert-danger">
                             <small *ngIf="f['password'].errors?.['required']">Password is required.</small>
@@ -36,9 +36,8 @@
                 </div>
             </div>
 
-
             <div class='form-row'>
-                <h4>Gearbox Details:</h4>
+                <h4>Gearbox Details: (Optional)</h4>
                 <div *ngIf="registerForm.errors?.['unverifiedGearbox']" class="alert alert-danger">
                     Gearbox account not verified! 
                 </div>
@@ -47,8 +46,8 @@
                     <!-- Gearbox Email -->
                     <div class="form-group">
                         <mat-form-field appearance="fill">
-                            <mat-label>Gearbox Email:</mat-label>
-                            <input matInput placeholder="Gearbox email" type="text" formControlName="gearbox_email">
+                            <mat-label>Gearbox Email</mat-label>
+                            <input matInput type="text" formControlName="gearbox_email">
                         </mat-form-field>
                         <div *ngIf="f['gearbox_email'].touched && f['gearbox_email'].invalid" class="alert alert-danger">
                             <small *ngIf="f['gearbox_email'].errors?.['email']">Email is not valid.</small>
@@ -61,8 +60,8 @@
                     <!-- Gearbox Password -->
                     <div class="form-group">
                         <mat-form-field appearance="fill">
-                            <mat-label>Geabox Passowrd:</mat-label>
-                            <input matInput placeholder="Gearbox password" type="password" formControlName="gearbox_password">
+                            <mat-label>Geabox Password</mat-label>
+                            <input matInput type="password" formControlName="gearbox_password">
                         </mat-form-field>
                         <div *ngIf="f['gearbox_password'].touched && f['gearbox_password'].dirty" class="alert alert-danger">
                             <small>Enter password to verify.</small>
