@@ -1,54 +1,66 @@
 <h2>User Games</h2>
 
 <div class="user-games-container">
-    <table matSort id="user-games-table" mat-table [dataSource]="userGames" class="table mat-elevation-z8 base-table">
-    <ng-container matColumnDef="game">
-        <th mat-header-cell *matHeaderCellDef> Game </th>
-        <td mat-cell *matCellDef="let userGame">{{userGame.game}} </td>
-    </ng-container>
+    <div class='user-game-item'>
+        <table matSort id="user-games-table" mat-table [dataSource]="userGames" class="mat-elevation-z8 base-table">
+            <ng-container matColumnDef="game">
+                <th mat-header-cell *matHeaderCellDef> Game </th>
+                <td mat-cell *matCellDef="let userGame">{{userGame.game}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="platform">
+                <th mat-header-cell *matHeaderCellDef> Platform </th>
+                <td mat-cell *matCellDef="let userGame"> {{userGame.platform}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="_id">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let userGame;">
+                    <button mat-icon-button color='warn' (click)="deleteUserGame(userGame._id)">
+                        <mat-icon inline=true>delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="userGameColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: userGameColumns;"></tr>
+        </table>
+    </div>
 
-    <ng-container matColumnDef="platform">
-        <th mat-header-cell *matHeaderCellDef> Platform </th>
-        <td mat-cell *matCellDef="let userGame"> {{userGame.platform}} </td>
-    </ng-container>
+    <div class='user-game-item'>
+        <form [formGroup]="userGameForm" (ngSubmit)="onSubmit()">
+            <input type="hidden" formControlName="user_id" [ngModel]="user._id">
+        
+            <div class="form-group">
+                <label for="game">Game:</label>
+                <div class='games-container'>
+                    <div class='radio-wrapper' *ngFor="let item of games">
+                        <label for='{{item}}_radio'>
+                            <input mat-radio-button id="{{item}}_radio" [value]='item' type="radio" formControlName="game" [(ngModel)]="game">
+                            <img class='game_icon' src="/assets/images/{{item}}.png" alt="{{item}} icon">
+                        </label>
+                    </div>
+                </div>
+                
+            </div>
+        
+            <div class="form-group">
+                <label for="platforms">Platform:</label>
+                <select class="form-control" id="platforms" required [(ngModel)]="platform" formControlName="platform">
+                    <option value="" selected>Please select a platform</option>
+                    <option *ngFor="let platform of platforms" [value]="platform">{{platform}}</option>
+                </select>
+            </div>
+        
+            <p>
+                <button type="submit" class="btn btn-primary" [disabled]="!userGameForm.valid">Submit</button>
+            </p>
+        </form>
 
-    <ng-container matColumnDef="_id">
-        <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let userGame;">
-            <button mat-icon-button color='warn' (click)="deleteUserGame(userGame._id)">
-                <mat-icon inline=true>delete</mat-icon>
-            </button>
-        </td>
-    </ng-container>
+    </div>
+    
 
-    <tr mat-header-row *matHeaderRowDef="userGameColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: userGameColumns;"></tr>
-    </table>
+    
+        
 </div>
 
-
-<form [formGroup]="userGameForm" (ngSubmit)="onSubmit()">
-    <input type="hidden" formControlName="user_id" [ngModel]="user._id">
-
-    <div class="form-group">
-        <label for="game">Game:</label>
-        <div class='radio' *ngFor="let item of games">
-        <label for="game">
-            <input id="item" [value]='item' type="radio" formControlName="game" [(ngModel)]="game">
-            {{item}}
-        </label>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="platforms">Platform:</label>
-        <select class="form-control" id="platforms" required [(ngModel)]="platform" formControlName="platform">
-            <option value="" selected>Please select a platform</option>
-            <option *ngFor="let platform of platforms" [value]="platform">{{platform}}</option>
-        </select>
-    </div>
-
-    <p>
-        <button type="submit" class="btn btn-primary" [disabled]="!userGameForm.valid">Submit</button>
-    </p>
-</form>

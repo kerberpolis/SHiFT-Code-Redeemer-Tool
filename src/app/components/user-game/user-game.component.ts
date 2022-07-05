@@ -21,9 +21,9 @@ export class UserGameComponent implements OnInit{
   platforms: string[] = ['Epic', 'Steam', 'Xbox', 'Playstation']
 
   game = ''
-  games: string[] = ['Borderlands: Game of the Year Edition', 'Borderlands 2',
-    'Borderlands: The Pre-Sequel', 'Borderlands 3',
-    'Tiny Tina\'s Wonderlands'
+  games: string[] = ['Tiny Tina\'s Wonderlands', 'Borderlands 3',
+   'Borderlands: The Pre-Sequel', 'Borderlands 2',
+    'Borderlands: Game of the Year Edition'
   ]
 
   public userGameForm: FormGroup 
@@ -54,10 +54,9 @@ export class UserGameComponent implements OnInit{
     this.userGames.sort = this.sort;
     this.userGames.sortData = (data: Array<UserGame>, sort: MatSort) => {
       const direction = sort.direction;
-      var games = ['Tiny Tina\'s Wonderlands', 'Borderlands 3', 'Borderlands: The Pre-Sequel', 'Borderlands 2', 'Borderlands: Game of the Year Edition']
       return data.sort((a: UserGame, b: UserGame) => {
-        let aIdx = games.indexOf(a.game)
-        let bIdx = games.indexOf(b.game)
+        let aIdx = this.games.indexOf(a.game)
+        let bIdx = this.games.indexOf(b.game)
         if (aIdx < bIdx) {
           return (direction == 'asc' ? 1: -1);
         } else if (aIdx > bIdx) {
@@ -77,19 +76,23 @@ export class UserGameComponent implements OnInit{
   }
 
   deleteUserGame(userGameId: number): void {
-    this.userGameService.deleteUserGame(userGameId)
-      .subscribe((response: unknown) => {
-          let userGames = this.userGames.data.filter((userGame: UserGame) => userGame._id != userGameId)
-          this.userGames.data = userGames
-      });
+    let userGames = this.userGames.data.filter((userGame: UserGame) => userGame._id != userGameId)
+    this.userGames.data = userGames
+
+    // this.userGameService.deleteUserGame(userGameId)
+    //   .subscribe((response: unknown) => {
+    //       let userGames = this.userGames.data.filter((userGame: UserGame) => userGame._id != userGameId)
+    //       this.userGames.data = userGames
+    //   });
   }
 
   onSubmit() {
-    this.userGameService.addUserGame(this.userGameForm.value).subscribe((userGame: UserGame) => {
-      if (userGame) {
-        this.userGames.data = [...this.userGames.data, userGame]
-        this.cdr.detectChanges()
-      }
-    });
+    console.log(this.userGameForm.value)
+    // this.userGameService.addUserGame(this.userGameForm.value).subscribe((userGame: UserGame) => {
+    //   if (userGame) {
+    //     this.userGames.data = [...this.userGames.data, userGame]
+    //     this.cdr.detectChanges()
+    //   }
+    // });
   }
 }

@@ -1,0 +1,59 @@
+.user-games-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.user-game-item {
+    width: 50%;
+    padding: 10px 10px;
+    float: left;
+     > div {
+        width: 100%;
+    }
+}
+
+#user-games-table {
+    width: 100%;
+}
+
+.games-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+
+}
+
+.radio-wrapper {
+    display: block;
+    padding: 0.5em;
+    img {
+        min-width: 60px;
+        min-height: 60px;
+        max-width: 120px;
+        max-height: 120px;
+    }
+}
+
+img:hover {
+    opacity:0.6;
+    cursor: pointer;
+}
+  
+img:active {
+    opacity:0.4;
+    cursor: pointer;
+}
+
+:host ::ng-deep .mat-radio-container {
+    display: none;
+}
+  
+input[type=radio] {
+    display: none;
+}
+
+input[type=radio]:checked ~ img{
+    background-color: grey;
+    border: 3px solid rgb(228, 207, 94);
+}
