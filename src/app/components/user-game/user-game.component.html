@@ -1,7 +1,7 @@
 <h2>User Games</h2>
 
 <div class="user-games-container">
-    <table id="user-games-table" mat-table [dataSource]="userGames" class="table mat-elevation-z8 base-table">
+    <table matSort id="user-games-table" mat-table [dataSource]="userGames" class="table mat-elevation-z8 base-table">
     <ng-container matColumnDef="game">
         <th mat-header-cell *matHeaderCellDef> Game </th>
         <td mat-cell *matCellDef="let userGame">{{userGame.game}} </td>
@@ -14,8 +14,8 @@
 
     <ng-container matColumnDef="_id">
         <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let userGame; let i = index">
-            <button mat-button (click)="deleteUserGame(i, userGame._id)" class="btn btn-primary">X</button>
+        <td mat-cell *matCellDef="let userGame;">
+            <button mat-button (click)="deleteUserGame(userGame._id)" class="btn btn-primary">X</button>
         </td>
     </ng-container>
 
