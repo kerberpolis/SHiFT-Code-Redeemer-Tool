@@ -5,6 +5,7 @@ import { ApiResponse } from '../../models/apiResponse'
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Code } from 'src/app/models/code';
 
 @Component({
   selector: 'app-code-list',
@@ -31,7 +32,11 @@ export class CodeListComponent implements OnInit, AfterViewInit {
  getCodes(): void {
     this.codeService.getCodes()
       .subscribe((rsp: ApiResponse) => {
-          this.codes.data = rsp.data
+          // filter only valid codes
+          this.codes.data = [...rsp.data.filter((item: unknown) => {
+            let code = item as Code
+            return code['is_valid'] == 1
+          })];
         });
   }
 
