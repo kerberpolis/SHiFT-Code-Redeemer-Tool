@@ -23,6 +23,7 @@ import { RegisterComponent } from './components/account/register/register.compon
 import { ProfileComponent } from './components/profile/profile.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { MatCardModule } from '@angular/material/card';
     AppRoutingModule,
     MatCardModule,
     HttpClientModule,
+    MatSelectModule,
     MatToolbarModule,
     MatIconModule,
     MatProgressSpinnerModule,

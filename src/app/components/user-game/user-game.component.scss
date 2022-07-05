@@ -21,12 +21,12 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-
+    justify-content: center;
 }
 
 .radio-wrapper {
     display: block;
-    padding: 0.5em;
+    padding: 0.5em 1em;
     img {
         min-width: 60px;
         min-height: 60px;
@@ -38,6 +38,7 @@
 img:hover {
     opacity:0.6;
     cursor: pointer;
+    background-color: grey;
 }
   
 img:active {
@@ -56,4 +57,19 @@ input[type=radio] {
 input[type=radio]:checked ~ img{
     background-color: grey;
     border: 3px solid rgb(228, 207, 94);
+}
+
+.button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    button {
+      margin: 0px 20px;
+    }
+  }
+
+.form-group {
+    display: flex;
 }

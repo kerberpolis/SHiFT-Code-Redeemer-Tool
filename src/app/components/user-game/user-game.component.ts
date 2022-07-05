@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormGroup, Validators, FormControl } from '@angular/forms'
 import { UserGame } from 'src/app/models/userGame';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -17,10 +18,7 @@ export class UserGameComponent implements OnInit{
   @ViewChild(MatSort) sort!: MatSort;
   @Output() addUserGame = new EventEmitter<UserGame>();
 
-  platform = ''
   platforms: string[] = ['Epic', 'Steam', 'Xbox', 'Playstation']
-
-  game = ''
   games: string[] = ['Tiny Tina\'s Wonderlands', 'Borderlands 3',
    'Borderlands: The Pre-Sequel', 'Borderlands 2',
     'Borderlands: Game of the Year Edition'
@@ -34,6 +32,7 @@ export class UserGameComponent implements OnInit{
 
   constructor(private userGameService: UserGameService,
      private authService: AuthService,
+     private location: Location,
      private cdr: ChangeDetectorRef) {
     this.userGames.data = new Array<UserGame>(); 
     this.userGameForm = new FormGroup({
@@ -68,6 +67,10 @@ export class UserGameComponent implements OnInit{
     }
   }
 
+  get f() {
+    return this.userGameForm.controls;
+  }
+
   getUserGames(): void {
     this.userGameService.getUserGames(this.user._id)
       .subscribe((rsp: ApiResponse) => {
@@ -84,11 +87,25 @@ export class UserGameComponent implements OnInit{
   }
 
   onSubmit() {
-    this.userGameService.addUserGame(this.userGameForm.value).subscribe((userGame: UserGame) => {
-      if (userGame) {
-        this.userGames.data = [...this.userGames.data, userGame]
-        this.cdr.detectChanges()
-      }
-    });
+    if (!this.userGameForm.get('game')!.value){
+      this.userGameForm.get('game')!.markAsTouched()
+      this.userGameForm.get('game')!.markAsDirty()
+    }
+    if (!this.userGameForm.get('platform')!.value){
+      this.userGameForm.get('platform')!.markAsTouched()
+      this.userGameForm.get('platform')!.markAsDirty()
+    }
+
+    if(this.userGameForm.valid){
+      this.userGameService.addUserGame(this.userGameForm.value).subscribe(
+        (response: UserGame) => {
+            this.userGames.data = [...this.userGames.data, response]
+            this.cdr.detectChanges()
+        });
+    }
+  }
+
+  back(): void {
+    this.location.back()
   }
 }

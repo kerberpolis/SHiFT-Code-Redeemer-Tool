@@ -36,31 +36,36 @@
                 <div class='games-container'>
                     <div class='radio-wrapper' *ngFor="let item of games">
                         <label for='{{item}}_radio'>
-                            <input mat-radio-button id="{{item}}_radio" [value]='item' type="radio" formControlName="game" [(ngModel)]="game">
+                            <input mat-radio-button id="{{item}}_radio" [value]='item' type="radio" formControlName="game">
                             <img class='game_icon' src="/assets/images/{{item}}.png" alt="{{item}} icon">
                         </label>
                     </div>
                 </div>
-                
             </div>
         
             <div class="form-group">
-                <label for="platforms">Platform:</label>
-                <select class="form-control" id="platforms" required [(ngModel)]="platform" formControlName="platform">
-                    <option value="" selected>Please select a platform</option>
-                    <option *ngFor="let platform of platforms" [value]="platform">{{platform}}</option>
-                </select>
+                <mat-form-field appearance="outline">
+                    <mat-label>Platform:</mat-label>
+                    <mat-select class="form-control" id="platforms" required formControlName="platform">
+                        <mat-option value="" selected>Please select a platform</mat-option>
+                        <mat-option *ngFor="let platform of platforms" [value]="platform">{{platform}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                
+                <div class='button-container'>
+                    <button mat-raised-button type="button" color="primary" (click)='back()'>Back</button>
+                    <button mat-raised-button type="submit" color="primary">Add Platform</button>
+                </div>
             </div>
-        
-            <p>
-                <button type="submit" class="btn btn-primary" [disabled]="!userGameForm.valid">Submit</button>
-            </p>
+
+            <div *ngIf="f['game'].touched && f['game'].invalid" class="alert alert-danger">
+                <small *ngIf="f['game'].errors?.['required']">You must select a game.</small>
+            </div>
+            <div *ngIf="f['platform'].touched && f['platform'].invalid" class="alert alert-danger">
+                <small *ngIf="f['platform'].errors?.['required']">You must select a platform.</small>
+            </div>           
+
         </form>
-
-    </div>
-    
-
-    
-        
+    </div>     
 </div>
 
