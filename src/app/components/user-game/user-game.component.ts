@@ -76,23 +76,19 @@ export class UserGameComponent implements OnInit{
   }
 
   deleteUserGame(userGameId: number): void {
-    let userGames = this.userGames.data.filter((userGame: UserGame) => userGame._id != userGameId)
-    this.userGames.data = userGames
-
-    // this.userGameService.deleteUserGame(userGameId)
-    //   .subscribe((response: unknown) => {
-    //       let userGames = this.userGames.data.filter((userGame: UserGame) => userGame._id != userGameId)
-    //       this.userGames.data = userGames
-    //   });
+    this.userGameService.deleteUserGame(userGameId)
+      .subscribe((response: unknown) => {
+          let userGames = this.userGames.data.filter((userGame: UserGame) => userGame._id != userGameId)
+          this.userGames.data = userGames
+      });
   }
 
   onSubmit() {
-    console.log(this.userGameForm.value)
-    // this.userGameService.addUserGame(this.userGameForm.value).subscribe((userGame: UserGame) => {
-    //   if (userGame) {
-    //     this.userGames.data = [...this.userGames.data, userGame]
-    //     this.cdr.detectChanges()
-    //   }
-    // });
+    this.userGameService.addUserGame(this.userGameForm.value).subscribe((userGame: UserGame) => {
+      if (userGame) {
+        this.userGames.data = [...this.userGames.data, userGame]
+        this.cdr.detectChanges()
+      }
+    });
   }
 }

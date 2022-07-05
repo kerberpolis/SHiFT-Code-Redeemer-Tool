@@ -24,7 +24,6 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { MatCardModule } from '@angular/material/card';
 
-
 @NgModule({
   declarations: [
     AppComponent,
