@@ -4,12 +4,13 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/user';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { GearboxData } from '../models/gearboxData';
-
+import { environment } from 'src/environments/environment'
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  public baseUrl: string = environment.apiBaseUrl
   public static readonly TOKEN_STORAGE_KEY = 'token';
   public static readonly AUTH_STORAGE_KEY = 'auth';
   public userSubject: BehaviorSubject<any>;
@@ -55,7 +56,7 @@ export class AuthService {
         .set('password', user.password)
         .set('grant_type', 'password');
 
-    return this.http.post('http://localhost:8080/borderlands-code-crawler/v1/token', data, this.httpOptions);
+    return this.http.post(`${this.baseUrl}/token`, data, this.httpOptions);
   }
 
   /** GET user and then set as value in authService */
@@ -67,7 +68,7 @@ export class AuthService {
       },
     };
   
-    return this.http.get<User>('http://localhost:8080/borderlands-code-crawler/v1/user', request_options);
+    return this.http.get<User>(`${this.baseUrl}/user`, request_options);
   }
 
   register(userData: User): Observable<any> {
