@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, NavigationStart } from '@angular/router';
+import { Router, NavigationStart, Event } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,13 +7,13 @@ import { Router, NavigationStart } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  showHead: boolean = false;
+  showHead = false;
   title = 'SHiFT-Code-Redeemer-Tool';
 
   
   constructor(private router: Router) {
     // on route change to '/login', set the variable showHead to false to hide header
-    router.events.forEach((event: any) => {
+    router.events.forEach((event: Event) => {
       if (event instanceof NavigationStart) {
         if (['/login', '/register'].includes(event['url'])) {
           this.showHead = false;

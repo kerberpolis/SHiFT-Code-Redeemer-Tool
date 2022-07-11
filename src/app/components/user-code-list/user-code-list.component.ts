@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/services/auth.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-user-code-list',
@@ -15,9 +16,9 @@ export class UserCodeListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  user: any;
-  public userCodes = new MatTableDataSource();
-  public userCodeColumns = ['game', 'platform', 'code', 'reward'];
+  user: User | null = null;
+  userCodes = new MatTableDataSource();
+  userCodeColumns = ['game', 'platform', 'code', 'reward'];
 
   constructor(private userCodeService: UserCodeService, private authService: AuthService) {
     this.userCodes.data = [];
@@ -25,21 +26,23 @@ export class UserCodeListComponent implements OnInit, AfterViewInit {
    }
 
    ngOnInit(): void {
-    this.authService.user.subscribe((data: any) => {
-      this.user = data
+    this.authService.user.subscribe((data: unknown) => {
+      this.user = data as User
     });
     this.getUserCodes();
   }
 
- getUserCodes(): void {
-    this.userCodeService.getUserCodes(this.user._id)
-      .subscribe((rsp: ApiResponse) => {
-          this.userCodes.data = rsp.data
-        });
+  getUserCodes(): void {
+    if(this.user){
+
+      this.userCodeService.getUserCodes(this.user._id)
+        .subscribe((rsp: ApiResponse) => {
+            this.userCodes.data = rsp.data
+          });
+    }
   }
 
   ngAfterViewInit(): void {
     this.userCodes.paginator = this.paginator;
   }
-
 }

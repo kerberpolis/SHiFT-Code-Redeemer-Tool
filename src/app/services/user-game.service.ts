@@ -18,8 +18,8 @@ export class UserGameService {
   };
 
   /** GET all codes */
-  getUserGames(user_id: string): Observable<any>{
-    return this.http.get<ApiResponse>(`${this.baseUrl}/user_games/${user_id}`);
+  getUserGames(userId: number): Observable<ApiResponse>{
+    return this.http.get<ApiResponse>(`${this.baseUrl}/user_games/${userId}`);
   }
 
   /** POST: add a user game to the database */

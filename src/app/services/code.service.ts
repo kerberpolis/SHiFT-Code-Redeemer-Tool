@@ -17,7 +17,7 @@ export class CodeService {
   };
 
   /** GET all codes */
-  getCodes(): Observable<any>{
+  getCodes(): Observable<ApiResponse>{
     return this.http.get<ApiResponse>(`${this.baseUrl}/codes`);
   }
 }

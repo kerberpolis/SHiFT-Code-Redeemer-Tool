@@ -4,9 +4,10 @@ import { ApiResponse } from 'src/app/models/apiResponse'
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/services/auth.service';
-import { FormGroup, Validators, FormControl } from '@angular/forms'
+import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms'
 import { UserGame } from 'src/app/models/userGame';
 import { Location } from '@angular/common';
+import { User } from 'src/app/models/user';
 
 
 @Component({
@@ -24,18 +25,18 @@ export class UserGameComponent implements OnInit{
     'Borderlands: Game of the Year Edition'
   ]
 
-  public userGameForm: FormGroup 
-  
-  user: any;
-  userGames: any = new MatTableDataSource();
+  userGameForm: FormGroup 
+  user: User | null = null
+  userGames = new MatTableDataSource(Array<UserGame>());
   userGameColumns = ['game', 'platform', '_id'];
 
   constructor(private userGameService: UserGameService,
      private authService: AuthService,
      private location: Location,
-     private cdr: ChangeDetectorRef) {
+     private cdr: ChangeDetectorRef,
+     private fb: FormBuilder) {
     this.userGames.data = new Array<UserGame>(); 
-    this.userGameForm = new FormGroup({
+    this.userGameForm = fb.group({
       game: new FormControl(null, [Validators.required]),
       platform: new FormControl(null, [Validators.required]),
       user_id: new FormControl(null, [Validators.required]),
@@ -43,8 +44,8 @@ export class UserGameComponent implements OnInit{
    }
 
    ngOnInit(): void {
-    this.authService.user.subscribe((data: any) => {
-      this.user = data
+    this.authService.user.subscribe((data: unknown) => {
+      this.user = data as User
     });
     this.getUserGames();
   }
@@ -54,8 +55,8 @@ export class UserGameComponent implements OnInit{
     this.userGames.sortData = (data: Array<UserGame>, sort: MatSort) => {
       const direction = sort.direction;
       return data.sort((a: UserGame, b: UserGame) => {
-        let aIdx = this.games.indexOf(a.game)
-        let bIdx = this.games.indexOf(b.game)
+        const aIdx = this.games.indexOf(a.game)
+        const bIdx = this.games.indexOf(b.game)
         if (aIdx < bIdx) {
           return (direction == 'asc' ? 1: -1);
         } else if (aIdx > bIdx) {
@@ -72,28 +73,37 @@ export class UserGameComponent implements OnInit{
   }
 
   getUserGames(): void {
-    this.userGameService.getUserGames(this.user._id)
-      .subscribe((rsp: ApiResponse) => {
-          this.userGames.data = <Array<UserGame>>rsp.data
-        });
+    if(this.user){
+      this.userGameService.getUserGames(this.user._id)
+        .subscribe((rsp: ApiResponse) => {
+            this.userGames.data = rsp.data as Array<UserGame>
+          });
+      }
   }
 
   deleteUserGame(userGameId: number): void {
     this.userGameService.deleteUserGame(userGameId)
       .subscribe((response: unknown) => {
-          let userGames = this.userGames.data.filter((userGame: UserGame) => userGame._id != userGameId)
+          const userGames = this.userGames.data.filter((userGame: UserGame) => userGame._id != userGameId)
           this.userGames.data = userGames
       });
   }
 
   onSubmit() {
-    if (!this.userGameForm.get('game')!.value){
-      this.userGameForm.get('game')!.markAsTouched()
-      this.userGameForm.get('game')!.markAsDirty()
+    const game = this.userGameForm.get('game')
+    if(game){
+      if (!game.value){
+        game.markAsTouched()
+        game.markAsDirty()
+      }
     }
-    if (!this.userGameForm.get('platform')!.value){
-      this.userGameForm.get('platform')!.markAsTouched()
-      this.userGameForm.get('platform')!.markAsDirty()
+
+    const platform = this.userGameForm.get('platform')
+    if(platform){
+      if (!platform.value){
+        platform.markAsTouched()
+        platform.markAsDirty()
+      }
     }
 
     if(this.userGameForm.valid){

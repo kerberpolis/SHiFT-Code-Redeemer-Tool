@@ -1,9 +1,5 @@
-name: Deploy AWS develop
-
-on:
-  push:
-    branches:
-    - develop
+name: Deploy AWS review
+on: pull_request
 
 jobs:
   deploy:

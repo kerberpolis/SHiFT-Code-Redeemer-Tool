@@ -3,6 +3,8 @@ import { FormGroup, Validators, FormControl } from '@angular/forms'
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common'
+import { HttpErrorResponse } from '@angular/common/http';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-login',
@@ -31,16 +33,16 @@ export class LoginComponent {
   onSubmit() {
     if(this.loginForm.valid){
       this.authService.setToken(this.loginForm.value).subscribe(
-        (response: any) => {
+        (response: unknown) => {
           localStorage.setItem(AuthService.TOKEN_STORAGE_KEY, JSON.stringify(response));
-          this.authService.setCurrentUser().subscribe((user: any) => {
+          this.authService.setCurrentUser().subscribe((user: unknown) => {
             localStorage.setItem(AuthService.AUTH_STORAGE_KEY, JSON.stringify(user));
-            this.authService.userSubject.next(user);
+            this.authService.userSubject.next(user as User);
             if (this.authService.userSubject.value)
               this.router.navigate(['/']);
           });
         },
-        (error: any) => {
+        (error: HttpErrorResponse) => {
           if (error.status === 401) {
             this.loginForm.setErrors({ unauthorised: true });
           }

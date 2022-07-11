@@ -1,6 +1,7 @@
 name: Linting
 on: push
 concurrency:
+  group: build-workflow
   cancel-in-progress: true
 jobs:
   build:
@@ -10,4 +11,4 @@ jobs:
       - name: Install modules
         run: npm install
       - name: Run ESLint
-        run: npx eslint . --ext .ts
+        run: npm run lint

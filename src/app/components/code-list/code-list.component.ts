@@ -26,10 +26,10 @@ export class CodeListComponent implements AfterViewInit {
     this.codeService.getCodes()
       .subscribe((rsp: ApiResponse) => {
         // filter only valid codes
-        this.codes.data = <Array<Code>>rsp.data.filter((item: unknown) => {
-          let code = item as Code
+        this.codes.data = rsp.data.filter((item: unknown) => {
+          const code = item as Code
           return code['is_valid'] == 1
-        });
+        }) as Array<Code>;
       });
   }
 
@@ -38,10 +38,10 @@ export class CodeListComponent implements AfterViewInit {
     this.codes.sort = this.sort;
     this.codes.sortData = (data: Array<Code>, sort: MatSort) => {
       const direction = sort.direction;
-      var games = ['Wonderlands', 'Borderlands 3', 'Borderlands 2 and 3', 'Borderlands The Pre-Sequel', 'Borderlands 2', 'Borderlands 1', 'Godfall']
+      const games = ['Wonderlands', 'Borderlands 3', 'Borderlands 2 and 3', 'Borderlands The Pre-Sequel', 'Borderlands 2', 'Borderlands 1', 'Godfall']
       return data.sort((a: Code, b: Code) => {
-        let aIdx = games.indexOf(a.game)
-        let bIdx = games.indexOf(b.game)
+        const aIdx = games.indexOf(a.game)
+        const bIdx = games.indexOf(b.game)
         if (aIdx < bIdx) {
           return (direction == 'asc' ? 1: -1);
         } else if (aIdx > bIdx) {

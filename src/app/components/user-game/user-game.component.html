@@ -29,7 +29,7 @@
 
     <div class='user-game-item'>
         <form [formGroup]="userGameForm" (ngSubmit)="onSubmit()">
-            <input type="hidden" formControlName="user_id" [ngModel]="user._id">
+            <input type="hidden" formControlName="user_id" [ngModel]="user!._id">
         
             <div class="form-group">
                 <label for="game">Game:</label>
