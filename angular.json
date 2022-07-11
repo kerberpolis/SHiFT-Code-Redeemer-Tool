@@ -60,6 +60,22 @@
               ],
               "outputHashing": "all"
             },
+            "review": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.review.ts"
+                }
+              ]
+            },
+            "develop": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.develop.ts"
+                }
+              ]
+            },
             "development": {
               "buildOptimizer": false,
               "optimization": false,
@@ -83,6 +99,9 @@
             },
             "development": {
               "browserTarget": "SHiFT-Code-Redeemer-Tool:build:development"
+            },
+            "review": {
+              "browserTarget": "SHiFT-Code-Redeemer-Tool:build:review"
             }
           },
           "defaultConfiguration": "development"
