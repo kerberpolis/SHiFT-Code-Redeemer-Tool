@@ -70,11 +70,11 @@ export class AuthService {
   }
 
   register(userData: User): Observable<unknown> {
-    return this.http.post('http://localhost:8080/borderlands-code-crawler/v1/register', userData, this.httpOptions);
+    return this.http.post(`${this.baseUrl}/register`, userData, this.httpOptions);
   }
 
   verifyGearbox(gearboxData: GearboxData): Observable<unknown> {
-    return this.http.post('http://localhost:8080/borderlands-code-crawler/v1/verify_gearbox', gearboxData, this.httpOptions);
+    return this.http.post(`${this.baseUrl}/verify_gearbox`, gearboxData, this.httpOptions);
   }
 
   logout(): void {
