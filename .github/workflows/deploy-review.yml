@@ -2,12 +2,12 @@ name: Deploy AWS review
 on: 
   pull_request:
     branches-ignore:    
-      - 'develop'
       - 'main'
+      - 'develop'
   push:
-    branches:
-      - '!main'
-      - '!develop'
+    branches-ignore:    
+      - 'main'
+      - 'develop'
 
 jobs:
   deploy:
