@@ -1,15 +1,9 @@
 @import "src/assets/scss/variables";
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     width: 100%;
     line-height: 4em;
-    background-color:  $colour_secondary;
     box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.37);
-    min-height: 4em;
-  
 }
 
 .logo-container {
@@ -22,24 +16,81 @@
   }
 }
 
-.links-container {
-  width: 60%;
-  display: flex;
-  justify-content: right;
-}
-
 .active-link {
   color: $active_link_color;
 }
 
-.header a {
-    padding: 0px 30px;
+::ng-deep .no-hover-effect.mat-button .mat-button-focus-overlay { 
+  background-color: transparent;
+}
+
+::ng-deep .mat-menu.mat-menu-panel {
+  border-radius: 2px;
+  top: 15px;
+  position: relative;
+  width: 13em;
+
+
+  .mat-menu-item {
+    font-weight: 500;
+    text-align: right;
+
+    &:hover {
+      color: $color_primary;
+      font-weight: bold;
+    }
+  }
+}
+
+.mat-menu-content {
+  background-color: $color_primary;
+}
+
+.space-between {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color:  $color_secondary;
+
+  & a {
     color: #000000;
     text-decoration: none;
-}
-
-.links-container a:hover {
+  }
+  
+  & a:hover {
     font-weight: bold;
-    background-color:  $colour_primary;
+  }
+  & div:nth-child(2) {
+    font-size: 14px;
 
+    & a {
+      margin-left: 2em;
+    }
+  }
 }
+
+@media only screen and (max-width: 680px) {
+  .large {
+    display: none;
+  }
+
+  .small {
+    display: block;
+  }
+
+  .space-between {
+    padding: 0em 1em;
+  }
+}
+
+@media only screen and (min-width: 680px) {
+  .small {
+    display: none;
+  }
+
+  .large {
+    display: block;
+  }
+}
+

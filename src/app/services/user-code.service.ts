@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ApiResponse } from '../models/apiResponse'
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment'
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserCodeService {
-  baseUrl: string = 'http://localhost:8080/borderlands-code-crawler/v1'
+  public baseUrl: string = environment.apiBaseUrl
 
   constructor(private http: HttpClient) { }
 
@@ -16,7 +17,7 @@ export class UserCodeService {
   };
 
   /** GET all codes redeemed by user */
-  getUserCodes(user_id: string): Observable<any>{
+  getUserCodes(user_id: number): Observable<ApiResponse>{
     return this.http.get<ApiResponse>(`${this.baseUrl}/user/${user_id}/codes`);
   }
 

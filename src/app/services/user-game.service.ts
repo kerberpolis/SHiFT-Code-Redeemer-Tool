@@ -3,12 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ApiResponse } from '../models/apiResponse'
 import { Observable } from 'rxjs';
 import { UserGame } from '../models/userGame';
+import { environment } from 'src/environments/environment'
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserGameService {
-  baseUrl: string = 'http://localhost:8080/borderlands-code-crawler/v1'
+  public baseUrl: string = environment.apiBaseUrl
 
   constructor(private http: HttpClient) { }
 
@@ -17,8 +18,8 @@ export class UserGameService {
   };
 
   /** GET all codes */
-  getUserGames(user_id: string): Observable<any>{
-    return this.http.get<ApiResponse>(`${this.baseUrl}/user_games/${user_id}`);
+  getUserGames(userId: number): Observable<ApiResponse>{
+    return this.http.get<ApiResponse>(`${this.baseUrl}/user_games/${userId}`);
   }
 
   /** POST: add a user game to the database */
