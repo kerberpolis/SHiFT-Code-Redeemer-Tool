@@ -68,8 +68,8 @@
                         </div>
                     </div>
 
-                    <button id='verify-gearbox' mat-raised-button type="button" color="primary" [ngClass]="gearboxValidateSuccess != null ? gearboxValidateSuccess ? 'button-success' : 'button-failure' : ''" (click)='verifyGearbox()' [disabled]='gearboxFormValid === true'>
-                        {{ gearboxValidateSuccess != null ? gearboxValidateSuccess ? 'Verified!' : 'Invalid!' : 'Verify' }}
+                    <button id='verify-gearbox' mat-raised-button type="button" color="primary" [ngClass]="gearboxValidateSuccess !== null ? gearboxValidateSuccess ? 'button-success' : 'button-failure' : ''" (click)='verifyGearbox()' [disabled]='gearboxFormValid === true'>
+                        {{ gearboxValidateSuccess !== null ? gearboxValidateSuccess ? 'Verified!' : 'Invalid!' : 'Verify' }}
                         <mat-spinner *ngIf='gearboxSubmitted'diameter="20"></mat-spinner>
                     </button>
                 </div>

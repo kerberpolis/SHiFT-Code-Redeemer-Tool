@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Submit Feedback</h1>
+<div mat-dialog-content>
+    <p>You can submit feedback for any suggestions you have or bugs you may have noticed.</p>
+    <form id="feedback" [formGroup]="feedbackForm" (submit)="submitFeedback()">    
+        <mat-form-field appearance="outline">
+            <mat-label>Title</mat-label>
+            <input matInput formControlName="title">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea matInput rows=5 formControlName="description"></textarea>
+        </mat-form-field>
+    </form>
+    <div *ngIf="feedbackForm.errors?.['failed']" class="alert alert-danger">
+            Failed to submit feedback!
+    </div>
+</div>
+<div mat-dialog-actions class='button-container'>
+  <button mat-raised-button mat-dialog-close color="primary">Back</button>
+  <button mat-raised-button form="feedback" type="submit" color="primary">Submit</button>
+</div>
