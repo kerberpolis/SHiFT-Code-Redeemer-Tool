@@ -24,6 +24,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
+import { FeedbackDialogComponent } from './components/feedback-dialog/feedback-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,7 @@ import { MatSelectModule } from '@angular/material/select';
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
+    FeedbackDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +53,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatSelectModule,
     MatToolbarModule,
     MatIconModule,
+    MatDialogModule,
     MatProgressSpinnerModule,
     MatInputModule,
     MatFormFieldModule,
