@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, EventEmitter, Output, ChangeDetectorRef } from '@angular/core';
+import { Component, ViewChild, OnInit, EventEmitter, Output, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { UserGameService } from 'src/app/services/user-game.service'
 import { ApiResponse } from 'src/app/models/apiResponse'
 import { MatSort } from '@angular/material/sort';
@@ -15,7 +15,7 @@ import { User } from 'src/app/models/user';
   templateUrl: './user-game.component.html',
   styleUrls: ['./user-game.component.scss']
 })
-export class UserGameComponent implements OnInit{
+export class UserGameComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @Output() addUserGame = new EventEmitter<UserGame>();
 
