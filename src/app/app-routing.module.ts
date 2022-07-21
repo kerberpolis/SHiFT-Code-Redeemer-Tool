@@ -7,11 +7,13 @@ import { LoginComponent } from './components/account/login/login.component'
 import { AuthService } from './services/auth.service';
 import { RegisterComponent } from './components/account/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { AboutComponent } from './components/about/about.component';
 
 const routes: Routes = [
   { path: '', component: CodeListComponent },
   { path: 'codes', component: UserCodeListComponent, canActivate:[AuthService] },
   { path: 'games', component: UserGameComponent, canActivate:[AuthService] },
+  { path: 'about', component: AboutComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent, canActivate:[AuthService] },

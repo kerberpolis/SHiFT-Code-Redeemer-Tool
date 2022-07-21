@@ -41,12 +41,12 @@ export class FeedbackDialogComponent {
       }
 
       this.githubService.submitFeedback(data).subscribe(
-        (response: any) => {
+        (response: unknown) => {
           if(response == true){
             this.dialogRef.close([]);
           }
         },
-        (error: any) => {
+        (error: unknown) => {
           this.feedbackForm.setErrors({ failed: true });
         }        
       );

@@ -1,0 +1,60 @@
+<div>
+    <h3>About SHiFT Redeemer</h3>
+    <p>
+        The project has been a personal effort of mine that originally set out to automatically redeem SHiFT codes for Borderlands games
+        which I played a lot of and to better by skills using python and its libraries.
+    </p>
+    <p>
+        I originaly ran everything on my local machine. I got my codes from <a href='https://twitter.com/dgSHiFTCodes' target="_blank" rel="noopener noreferrer">dgSHiFTCodes'</a> account using
+        <a href='https://developer.twitter.com/en/docs/twitter-api' target="_blank" rel="noopener noreferrer">Twitters API (v1)</a> by Streaming any tweets posted. The content of any tweet
+        collected is parsed using regular expressions due to their consistant format and SHiFT code information such as the code itself, and its 
+        reward, the game it is redeemable against, whether it is a universal code or platform specific, and other meta information and is then
+        stored in a sqlite3 database.
+        I had a seperate script that I would run to gather all codes from the database and using selenium I created a web crawler that would
+        log into my gearbox account using a local .env file and iterativly input the codes <a href='https://shift.gearboxsoftware.com/rewards' target="_blank" rel="noopener noreferrer">here</a>.
+    </p>
+    <p>
+        I found Streaming the tweets to be uneccesary for such as simple task. I discovered a <a href='https://shift.orcicorn.com/' target="_blank" rel="noopener noreferrer">web page</a>
+        created by the same owner as the twitter account that archives all the codes they have collected. I scraped the site for available codes
+        using a simple http request. I still parse the dgSHiFTCodes twitter account using Twitter API (v2) to get the most recent tweets.
+        Both of there scripts periodically ran using cron to collect any recent codes.
+    </p>
+    <p>
+        The more codes I gathered, the more complex of a tool this became and some issues developed as it became inefficient to iterate
+        through so many codes. So I had to track which codes had been successfully or not based on the output displayed on the page 
+        when attempting to redeem the code. If a code was no longer available (e.g. the output was 'Code has expired') then the code flagged
+        as invalid and would not be selected when gathering available codes.
+    </p>
+    <p>
+        Some others were interested in the idea so I stored their encrypted gearbox information in a users table. From there, in different threads.
+        the users were iterated through and for each user the available codes attempt to be redeemed tracking which code was successfully redeemed
+        per user. 
+    </p>
+    <p>
+        Next problem was some people wanted to redeem codes on different platforms. So I had to track platform preferences for each user
+        and redeem the code for the correct platform based on those preferences and the game the code was for.
+    </p>
+    <p>
+        I created an API using FastAPI to access the database information and interact with the Gearbox site, and an Angular frontend for displaying
+        useful data returned from the API such as what codes were successfully redeemed for a user using this tool. Both thr API and frontend 
+        are dockerised and deployed using Github Actions to AWS.
+    </p>
+    <p>
+        If you have any comments or questions you can contact me directly by email danielhsutton@gmail.com or you can
+        <a href='#' (click)="openFeebackDialog()">submit feedback here</a>.
+    </p>
+    <p>
+        This is not a finished project and I am still working out some issues when I can.
+    </p>
+        
+    <h5>Tools:</h5>
+    <ul>
+        <li>FastAPI</li>
+        <li>sqlite3</li>
+        <li>Angular</li>
+        <li>Selenium</li>
+        <li>Docker</li>
+        <li>AWS</li>
+        <li>Twitter API</li>
+    </ul>
+</div>

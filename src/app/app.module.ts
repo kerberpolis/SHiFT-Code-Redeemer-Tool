@@ -26,6 +26,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { FeedbackDialogComponent } from './components/feedback-dialog/feedback-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     RegisterComponent,
     ProfileComponent,
     FeedbackDialogComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,

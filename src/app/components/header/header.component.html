@@ -7,7 +7,7 @@
     <div class="large">
         <a *ngIf="user" routerLink="/codes" routerLinkActive="active-link">Codes</a>
         <a *ngIf="user" routerLink="/games" routerLinkActive="active-link">Games</a>  
-        <a>About</a>
+        <a routerLink="/about" routerLinkActive="active-link">About</a>
         <a *ngIf="!user" routerLink="/login" routerLinkActive="active-link">Login</a>
         <button class='no-hover-effect' *ngIf="user" mat-button [matMenuTriggerFor]="menu2">Hello {{user.email}}!</button>
         <mat-menu #menu2="matMenu" class="mat-menu mat-menu-lg">
@@ -22,7 +22,7 @@
         <mat-menu #menu1="matMenu" class="mat-menu mat-menu-sm">
             <button *ngIf="user" mat-menu-item routerLinkActive="active-link" routerLink="/codes">Codes</button>
             <button *ngIf="user" mat-menu-item routerLinkActive="active-link" routerLink="/games">Games</button>
-            <button mat-menu-item [disabled]='true'>About</button>
+            <button mat-menu-item routerLinkActive="active-link" routerLink="/about">About</button>
             <button *ngIf="!user" mat-menu-item routerLinkActive="active-link" routerLink="/login">Login</button>
             <button *ngIf="user" mat-menu-item routerLinkActive="active-link" routerLink="/profile">Profile</button>
             <button *ngIf="user" mat-menu-item routerLinkActive="active-link" (click)="logout()">Logout</button>
