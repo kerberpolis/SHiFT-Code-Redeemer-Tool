@@ -18,7 +18,7 @@ export class GithubService {
   };
 
   /** POST user feedback */
-  submitFeedback(data: FeedbackData): Observable<any>{
+  submitFeedback(data: FeedbackData): Observable<ApiResponse>{
     return this.http.post<ApiResponse>(`${this.baseUrl}/feedback`, data, this.httpOptions);
   }
 }

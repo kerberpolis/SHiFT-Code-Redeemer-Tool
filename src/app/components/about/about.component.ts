@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
@@ -6,16 +6,12 @@ import { DialogService } from 'src/app/services/dialog.service';
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.scss']
 })
-export class AboutComponent implements OnInit {
+export class AboutComponent {
 
   constructor(private dialogService: DialogService) { }
-
-  ngOnInit(): void {
-  }
 
   public openFeebackDialog(): boolean {
     this.dialogService.openFeedbackDialog();
     return false;
   }
-
 }

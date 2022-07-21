@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
-import {MatDialog} from '@angular/material/dialog';
-import { FeedbackDialogComponent } from 'src/app/components/feedback-dialog/feedback-dialog.component'
 import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({

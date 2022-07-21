@@ -75,8 +75,8 @@ export class UserGameComponent implements OnInit, AfterViewInit {
   getUserGames(): void {
     if(this.user){
       this.userGameService.getUserGames(this.user._id)
-        .subscribe((rsp: ApiResponse) => {
-            this.userGames.data = rsp.data as Array<UserGame>
+        .subscribe((response: ApiResponse) => {
+            this.userGames.data = response.data as Array<UserGame>
           });
       }
   }
