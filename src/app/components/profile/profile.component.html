@@ -1,9 +1,38 @@
-<button mat-icon-button color='primary' (click)="openFeedbackDialog()">
-    <mat-icon inline=true>feedback</mat-icon>
-</button>
+<div *ngIf="user">
+    <mat-card>
+        <mat-card-content>    
+            <h4>Profile <button mat-icon-button color='primary' (click)="openFeedbackDialog()">
+                    <mat-icon inline=true>feedback</mat-icon>
+                </button></h4>
+           
+            <div class='row'>
+                <div class='row-title'>Email</div>
+                <div class='row-container'>
+                    <div *ngIf='!editEmail'>
+                        <span>{{user.email}}</span>
+                    </div>
+                    <app-email-change *ngIf='editEmail' [user]="user"></app-email-change>
 
-<app-email-change [user]="user"></app-email-change>
+                    <div class='button-container'>
+                        <button mat-button color='primary' (click)="toggleEditEmail()">{{ editEmail ? 'Cancel' : 'Edit'}}</button>
+                    </div>
+                </div>
+            </div>
 
-<app-pw-change></app-pw-change>
+            <div class='row'>
+                <div class='row-title'>Gearbox Details</div>
+                <div class='row-container'>
+                    <div *ngIf='!editGearbox'>
+                        <span>{{user.gearbox_email}}</span>
+                    </div>
+                    <app-gearbox-verify *ngIf='editGearbox' [user]="user"></app-gearbox-verify>
 
-<app-gearbox-verify [user]="user"></app-gearbox-verify>
+                    <button mat-button color='primary' (click)="toggleEditGearbox()">{{ editGearbox ? 'Cancel' : 'Edit'}}</button>
+                </div>
+            </div>
+        </mat-card-content>    
+    </mat-card>
+</div>
+
+
+<app-pw-change [user]="user"></app-pw-change>

@@ -43,7 +43,6 @@ export class GearboxVerifyComponent {
         this.checkGearboxValid()
       });
     }
-    
   }
 
    get f() {
@@ -78,7 +77,7 @@ export class GearboxVerifyComponent {
       }  
      
       // check if both gearbox password and email are present or both not present
-      this.authService.updateUser(this.gearboxForm.value as UserData).subscribe(
+      this.authService.updateUser(this.gearboxForm.value as UserData, this.user!._id).subscribe(
         (response: unknown) => {
             console.log(response)
         },

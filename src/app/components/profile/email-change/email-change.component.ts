@@ -30,9 +30,9 @@ export class EmailChangeComponent {
   }
 
    onSubmit() {
-    if(this.updateEmailForm.valid){
+    if(this.updateEmailForm.valid && this.user){
       const userData = this.updateEmailForm.value as UserData
-      this.authService.updateUser(userData).subscribe((result: unknown) => {
+      this.authService.updateUser(userData, this.user._id).subscribe((result: unknown) => {
           console.log(result)
       })
     }

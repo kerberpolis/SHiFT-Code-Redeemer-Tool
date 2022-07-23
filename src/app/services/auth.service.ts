@@ -78,8 +78,8 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/verify_gearbox`, gearboxData, this.httpOptions);
   }
 
-  updateUser(userData: UserData) {
-    return this.http.patch(`${this.baseUrl}/user`, userData, this.httpOptions);
+  updateUser(userData: UserData, user_id: number) {
+    return this.http.patch(`${this.baseUrl}/user/${user_id}`, userData, this.httpOptions);
   }
   
   logout(): void {

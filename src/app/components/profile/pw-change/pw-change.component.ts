@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Location } from '@angular/common'
 import { UserData } from 'src/app/models/userData';
 import { ValidatorService } from 'src/app/services/validator.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-pw-change',
@@ -11,6 +12,7 @@ import { ValidatorService } from 'src/app/services/validator.service';
   styleUrls: ['./pw-change.component.scss']
 })
 export class PwChangeComponent {
+  @Input() user: User | null = null;
 
   public updatePasswordForm: FormGroup
   public fieldTextType = false;
@@ -34,9 +36,11 @@ export class PwChangeComponent {
   }
 
   onSubmit() {
-    if(this.updatePasswordForm.valid){
-      const userData = this.updatePasswordForm.value as UserData
-      this.authService.updateUser(userData).subscribe((result: unknown) => {
+    if(this.updatePasswordForm.valid && this.user){
+      const userData = <UserData>{
+        password: this.updatePasswordForm.controls['new_password'].value
+      }
+      this.authService.updateUser(userData, this.user._id).subscribe((result: unknown) => {
           console.log(result)
       })
     }
