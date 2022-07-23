@@ -32,11 +32,23 @@ export class EmailChangeComponent {
    onSubmit() {
     if(this.updateEmailForm.valid && this.user){
       const userData = this.updateEmailForm.value as UserData
-      this.authService.updateUser(userData, this.user._id).subscribe((result: unknown) => {
-          console.log(result)
-      })
+      this.authService.updateUser(userData, this.user._id).subscribe((response: unknown) => { 
+        const user = <User>response
+        const userData = <User>{
+          email: user.email,
+          password: user.password
+        }
+        
+        this.authService.setToken(userData).subscribe(
+          (response: unknown) => {
+            localStorage.setItem(AuthService.TOKEN_STORAGE_KEY, JSON.stringify(response));
+            this.authService.setCurrentUser().subscribe((user: unknown) => {
+              localStorage.setItem(AuthService.AUTH_STORAGE_KEY, JSON.stringify(user));
+              this.authService.userSubject.next(user as User);
+            });
+          });
+      });
     }
-
    }
 
 }
