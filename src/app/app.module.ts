@@ -28,6 +28,8 @@ import { FeedbackDialogComponent } from './components/feedback-dialog/feedback-d
 import { MatDialogModule } from '@angular/material/dialog';
 import { AboutComponent } from './components/about/about.component';
 import { VerifiedComponent } from './components/account/verified/verified.component';
+import { PwChangeComponent } from './components/profile/pw-change/pw-change.component';
+import { GearboxVerifyComponent } from './components/profile/gearbox-verify/gearbox-verify.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { VerifiedComponent } from './components/account/verified/verified.compon
     FeedbackDialogComponent,
     AboutComponent,
     VerifiedComponent,
+    PwChangeComponent,
+    GearboxVerifyComponent,
   ],
   imports: [
     BrowserModule,

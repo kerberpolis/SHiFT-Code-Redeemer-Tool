@@ -86,6 +86,10 @@ export class AuthService {
     return this.http.patch(`${this.baseUrl}/user`, userData, this.httpOptions);
   }
 
+  updateGearboxDetails(userData: UserData) {
+    return this.http.patch(`${this.baseUrl}/user`, userData, this.httpOptions);
+  }
+  
   logout(): void {
     localStorage.removeItem(AuthService.TOKEN_STORAGE_KEY);
     localStorage.removeItem(AuthService.AUTH_STORAGE_KEY);
