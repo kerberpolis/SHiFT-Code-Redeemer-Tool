@@ -30,6 +30,7 @@ import { AboutComponent } from './components/about/about.component';
 import { VerifiedComponent } from './components/account/verified/verified.component';
 import { PwChangeComponent } from './components/profile/pw-change/pw-change.component';
 import { GearboxVerifyComponent } from './components/profile/gearbox-verify/gearbox-verify.component';
+import { EmailChangeComponent } from './components/profile/email-change/email-change.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { GearboxVerifyComponent } from './components/profile/gearbox-verify/gear
     VerifiedComponent,
     PwChangeComponent,
     GearboxVerifyComponent,
+    EmailChangeComponent,
   ],
   imports: [
     BrowserModule,

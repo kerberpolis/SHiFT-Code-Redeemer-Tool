@@ -78,15 +78,7 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/verify_gearbox`, gearboxData, this.httpOptions);
   }
 
-  verifyUser(token: string) {
-    return this.http.post(`${this.baseUrl}/confirm?token=${token}`, this.httpOptions);
-  }
-  
-  updatePassword(userData: UserData) {
-    return this.http.patch(`${this.baseUrl}/user`, userData, this.httpOptions);
-  }
-
-  updateGearboxDetails(userData: UserData) {
+  updateUser(userData: UserData) {
     return this.http.patch(`${this.baseUrl}/user`, userData, this.httpOptions);
   }
   

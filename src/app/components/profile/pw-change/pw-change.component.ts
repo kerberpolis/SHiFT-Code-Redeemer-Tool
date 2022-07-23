@@ -36,7 +36,7 @@ export class PwChangeComponent {
   onSubmit() {
     if(this.updatePasswordForm.valid){
       const userData = this.updatePasswordForm.value as UserData
-      this.authService.updatePassword(userData).subscribe((result: unknown) => {
+      this.authService.updateUser(userData).subscribe((result: unknown) => {
           console.log(result)
       })
     }

@@ -1,12 +1,9 @@
-<div *ngIf="user">
-    <span>Email: {{user.email}}</span><br/>
-    <span>Gearbox Email: {{user.gearbox_email}}</span>
-</div>
 <button mat-icon-button color='primary' (click)="openFeedbackDialog()">
     <mat-icon inline=true>feedback</mat-icon>
 </button>
 
-<app-pw-change></app-pw-change>
+<app-email-change [user]="user"></app-email-change>
 
+<app-pw-change></app-pw-change>
 
 <app-gearbox-verify [user]="user"></app-gearbox-verify>
