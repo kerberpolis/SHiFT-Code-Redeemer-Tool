@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserData } from 'src/app/models/userData';
 import { HttpErrorResponse } from '@angular/common/http';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-gearbox-verify',
@@ -10,6 +11,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./gearbox-verify.component.scss']
 })
 export class GearboxVerifyComponent {
+  @Input() user: User | null;
 
   gearboxSubmitted = false;  // used to show the spinning icon while gearbox details are being verified.
   gearboxFormValid = true;  // checks if gearbox details in form are valid
@@ -18,7 +20,9 @@ export class GearboxVerifyComponent {
   public fieldTextType = false;
 
   constructor(private authService: AuthService, private formBuilder: FormBuilder) {
-    this.gearboxForm = formBuilder.group({
+    this.user = null;
+
+    this.gearboxForm = this.formBuilder.group({
         gearbox_email: new FormControl('', [Validators.required, Validators.email]),
         gearbox_password: new FormControl('', [Validators.required])
       }

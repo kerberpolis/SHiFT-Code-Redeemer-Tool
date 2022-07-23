@@ -10,7 +10,7 @@ export class ValidatorService {
     return (formGroup: FormGroup) => {
       const control = formGroup.controls[controlName];
       const matchingControl = formGroup.controls[matchingControlName];
-      console.log(matchingControl)
+
       if (matchingControl.errors && !matchingControl.errors['mustMatch']) {
         return;
       }

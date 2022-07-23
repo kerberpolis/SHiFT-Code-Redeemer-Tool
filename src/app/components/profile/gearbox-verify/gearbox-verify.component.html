@@ -13,7 +13,7 @@
                     <div class="form-group">
                         <mat-form-field appearance="fill">
                             <mat-label>Gearbox Email</mat-label>
-                            <input matInput type="text" formControlName="gearbox_email">
+                            <input matInput type="text" [ngModel]='user?.gearbox_email' formControlName="gearbox_email">
                         </mat-form-field>
                         <div *ngIf="f['gearbox_email'].touched && f['gearbox_email'].invalid" class="alert alert-danger">
                             <small *ngIf="f['gearbox_email'].errors?.['email']">Email is not valid.</small>
@@ -25,7 +25,7 @@
                     <div class="form-group">
                         <mat-form-field appearance="fill">
                             <mat-label>Geabox Password</mat-label>
-                            <input matInput [type]="fieldTextType ? 'text' : 'password'" formControlName="gearbox_password">
+                            <input matInput [type]="fieldTextType ? 'text' : 'password'" [ngModel]='user?.gearbox_password' formControlName="gearbox_password">
                             <div class="input-group-append">
                                 <span class="input-group-text">
                                     <i
