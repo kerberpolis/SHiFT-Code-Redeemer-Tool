@@ -5,5 +5,6 @@ export interface User {
     gearbox_email: string;
     gearbox_password: string;
     notify_launch_game: number;
+    verified: number;
   }
   

@@ -31,15 +31,23 @@ export class LoginComponent {
   }
 
   onSubmit() {
+    this.loginForm.setErrors({ unverified: null });
+    this.loginForm.updateValueAndValidity();
+
     if(this.loginForm.valid){
       this.authService.setToken(this.loginForm.value).subscribe(
         (response: unknown) => {
           localStorage.setItem(AuthService.TOKEN_STORAGE_KEY, JSON.stringify(response));
-          this.authService.setCurrentUser().subscribe((user: unknown) => {
-            localStorage.setItem(AuthService.AUTH_STORAGE_KEY, JSON.stringify(user));
-            this.authService.userSubject.next(user as User);
-            if (this.authService.userSubject.value)
-              this.router.navigate(['/']);
+          this.authService.setCurrentUser().subscribe((response: unknown) => {
+            const user = <User>response
+            if(!user['verified']){
+              this.loginForm.setErrors({ unverified: true });
+            }else{
+              localStorage.setItem(AuthService.AUTH_STORAGE_KEY, JSON.stringify(user));
+              this.authService.userSubject.next(user as User);
+              if (this.authService.userSubject.value)
+                this.router.navigate(['/']);
+            }
           });
         },
         (error: HttpErrorResponse) => {

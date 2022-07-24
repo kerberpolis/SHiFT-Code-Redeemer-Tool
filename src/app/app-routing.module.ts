@@ -8,6 +8,7 @@ import { AuthService } from './services/auth.service';
 import { RegisterComponent } from './components/account/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AboutComponent } from './components/about/about.component';
+import { VerifiedComponent } from './components/account/verified/verified.component';
 
 const routes: Routes = [
   { path: '', component: CodeListComponent },
@@ -17,7 +18,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent, canActivate:[AuthService] },
-
+  { path: 'verify', component: VerifiedComponent }
 ];
 
 @NgModule({
