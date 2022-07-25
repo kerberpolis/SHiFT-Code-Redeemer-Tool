@@ -78,14 +78,14 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/verify_gearbox`, gearboxData, this.httpOptions);
   }
   
-  updateUser(userData: UserData) {
-    return this.http.patch(`${this.baseUrl}/user`, userData, this.httpOptions);
+  updateUser(userData: UserData, userID: number) {
+    return this.http.patch(`${this.baseUrl}/user/${userID}`, userData, this.httpOptions);
   }
   
   verifyUser(token: string) {
     return this.http.post(`${this.baseUrl}/confirm?token=${token}`, this.httpOptions);
   }
-  
+
   logout(): void {
     localStorage.removeItem(AuthService.TOKEN_STORAGE_KEY);
     localStorage.removeItem(AuthService.AUTH_STORAGE_KEY);
