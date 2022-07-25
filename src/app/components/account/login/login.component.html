@@ -5,6 +5,9 @@
         <div *ngIf="loginForm.errors?.['unauthorised']" class="alert alert-danger">
           Username or Password incorrect!
         </div>
+        <div *ngIf="loginForm.errors?.['unverified']" class="alert alert-danger">
+          Username has not been verified!
+        </div>
        
         <mat-form-field appearance="fill">
           <mat-label>Email</mat-label>
@@ -13,7 +16,7 @@
 
         <mat-form-field appearance="fill">
           <mat-label>Password</mat-label>
-          <input matInput type="password" formControlName="password">
+          <input matInput type="password" autocomplete="on" formControlName="password">
         </mat-form-field>
  
         <div class='button-container'>

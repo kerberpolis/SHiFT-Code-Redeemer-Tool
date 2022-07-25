@@ -77,6 +77,10 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/verify_gearbox`, gearboxData, this.httpOptions);
   }
 
+  verifyUser(token: string) {
+    return this.http.post(`${this.baseUrl}/confirm?token=${token}`, this.httpOptions);
+  }
+
   logout(): void {
     localStorage.removeItem(AuthService.TOKEN_STORAGE_KEY);
     localStorage.removeItem(AuthService.AUTH_STORAGE_KEY);

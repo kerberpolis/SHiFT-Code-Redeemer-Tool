@@ -27,6 +27,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { FeedbackDialogComponent } from './components/feedback-dialog/feedback-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AboutComponent } from './components/about/about.component';
+import { VerifiedComponent } from './components/account/verified/verified.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { AboutComponent } from './components/about/about.component';
     ProfileComponent,
     FeedbackDialogComponent,
     AboutComponent,
+    VerifiedComponent,
   ],
   imports: [
     BrowserModule,
