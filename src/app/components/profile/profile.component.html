@@ -23,7 +23,8 @@
                 <div class='row-title'>Gearbox Email</div>
                 <div class='row-container'>
                     <div *ngIf='!editGearbox'>
-                        <span>{{user.gearbox_email}}</span>
+                        <span *ngIf='user.gearbox_email'>{{user.gearbox_email}}</span>
+                        <span *ngIf='!user.gearbox_email'>Gearbox details not set!</span>
                     </div>
                     <app-gearbox-verify *ngIf='editGearbox' [user]="user"></app-gearbox-verify>
                     <div class='button-container'>
