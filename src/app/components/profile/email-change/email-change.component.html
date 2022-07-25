@@ -1,0 +1,30 @@
+<form id='updateEmail' class="align-middle" [formGroup]="updateEmailForm" (ngSubmit)="onSubmit()">
+    <div class='form-row'>               
+        <div class="form-group-wrapper">
+            <!-- Email -->
+            <div class="form-group">
+                <mat-form-field appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="text" formControlName="email">
+                </mat-form-field>
+            </div>
+
+            <!-- Confirm Email -->
+
+            <div class="form-group">
+                <mat-form-field appearance="fill">
+                    <mat-label>Confirm Email</mat-label>
+                    <input matInput type="text" formControlName="email_confirm">
+                </mat-form-field>
+                <div *ngIf="f['email_confirm'].touched && f['email_confirm'].errors?.['mustMatch']" class="alert alert-danger">
+                    <small>Emails do not match.</small>
+                </div>
+            </div>
+            
+
+            <div class="form-group">
+                <button mat-raised-button type="submit" color="primary" form="updateEmail" class="btn btn-primary">Update</button>
+            </div>
+        </div>
+    </div>
+</form>

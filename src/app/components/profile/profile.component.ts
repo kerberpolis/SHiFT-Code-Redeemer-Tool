@@ -11,6 +11,10 @@ import { DialogService } from 'src/app/services/dialog.service';
 export class ProfileComponent implements OnInit {
   public user: User | null = null;
 
+
+  public editEmail = false;
+  public editGearbox = false;
+  
   constructor(private authService: AuthService, public dialogService: DialogService) { 
     this.user = null;
   }
@@ -23,5 +27,13 @@ export class ProfileComponent implements OnInit {
 
   public openFeedbackDialog(): void {
     this.dialogService.openFeedbackDialog();
+  }
+
+  public toggleEditEmail(){
+    this.editEmail = !this.editEmail;
+  }
+
+  public toggleEditGearbox(){
+    this.editGearbox = !this.editGearbox;
   }
 }

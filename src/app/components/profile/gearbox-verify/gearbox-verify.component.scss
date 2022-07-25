@@ -1,0 +1,35 @@
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    button {
+      margin: 0px 30px;
+    }
+  }
+  
+  .button-success {
+      background-color: green;
+  }
+  
+  .button-failure {
+      background-color: red !important; 
+  }
+    
+  #verify-gearbox {
+    margin: 15px;
+  }
+  
+  ::ng-deep .mat-progress-spinner, .mat-spinner {
+    margin-top: 8px;
+    margin-left: 8px;
+    circle {
+      stroke: #ffffff !important;
+  
+    }
+  }
+
+  ::ng-deep  .mat-button-wrapper {
+    display: flex;
+  }

@@ -1,0 +1,48 @@
+::ng-deep .fa-eye-slash:hover,
+.fa-eye:hover {
+  cursor: pointer;
+}
+
+::ng-deep .form-group-wrapper {
+    display: flex;
+    margin-bottom:16px;
+  }
+  
+::ng-deep  .form-group-wrapper .form-group{
+    padding-left: 20px;
+  }
+
+::ng-deep .input-group-text {
+    background-color: transparent;
+    border: none;
+    padding: 0rem 0.75rem;
+    font-size: 1rem;
+    line-height: 0.8;
+}
+
+::ng-deep .mat-form-field-infix {
+    display: flex !important;
+}
+
+.row {
+  margin: 30px 10px;
+}
+
+.row-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.row-title{
+  font-size: 16px;
+  font-weight: bold;
+}
+
+::ng-deep mat-card {
+  margin: 30px 20px;
+}
+
+.container {
+  margin: 20px 70px;
+}

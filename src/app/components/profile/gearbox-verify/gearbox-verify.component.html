@@ -1,0 +1,54 @@
+<form id='gearbox' class="align-middle" [formGroup]="gearboxForm" (ngSubmit)="onSubmit()">
+    <div class='form-row'>
+        <div *ngIf="gearboxForm.errors?.['unverifiedGearbox']" class="alert alert-danger">
+            Gearbox account not verified! 
+        </div>
+
+        <div class="form-group-wrapper">
+            <!-- Gearbox Email -->
+            <div class="form-group">
+                <mat-form-field appearance="fill">
+                    <mat-label>Gearbox Email</mat-label>
+                    <input matInput type="text" [ngModel]='user?.gearbox_email' formControlName="gearbox_email">
+                </mat-form-field>
+                <div *ngIf="f['gearbox_email'].touched && f['gearbox_email'].invalid" class="alert alert-danger">
+                    <small *ngIf="f['gearbox_email'].errors?.['email']">Email is not valid.</small>
+                    <small *ngIf="f['gearbox_email'].errors?.['required']">Enter email to verify.</small>
+                </div>
+            </div>
+            
+            <!-- Gearbox Password -->
+            <div class="form-group">
+                <mat-form-field appearance="fill">
+                    <mat-label>Geabox Password</mat-label>
+                    <input matInput [type]="fieldTextType ? 'text' : 'password'" [ngModel]='user?.gearbox_password' formControlName="gearbox_password">
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <i
+                            class="fa"
+                            [ngClass]="{
+                                'fa-eye-slash': !fieldTextType,
+                                'fa-eye': fieldTextType
+                            }"
+                            (click)="toggleFieldTextType()"
+                            ></i>
+                        </span>
+                    </div>
+                </mat-form-field>
+                <div *ngIf="f['gearbox_password'].touched && f['gearbox_password'].invalid" class="alert alert-danger">
+                    <small *ngIf="f['gearbox_password'].errors?.['required']">Enter password to verify.</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class='button-container'>
+                    <button id='verify-gearbox' mat-raised-button type="button" color="primary" [ngClass]="gearboxValidateSuccess !== null ? gearboxValidateSuccess ? 'button-success' : 'button-failure' : ''" (click)='verifyGearbox()' [disabled]='gearboxFormValid === true'>
+                        {{ gearboxValidateSuccess !== null ? gearboxValidateSuccess ? 'Verified!' : 'Invalid!' : 'Verify' }}
+                        <mat-spinner *ngIf='gearboxSubmitted'diameter="20"></mat-spinner>
+                    </button>
+                    <button mat-raised-button type="submit" color="primary" form="gearbox" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>                
+</form>

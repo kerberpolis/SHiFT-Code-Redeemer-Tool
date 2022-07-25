@@ -5,6 +5,7 @@ import { User } from '../models/user';
 import { Router } from '@angular/router';
 import { GearboxData } from '../models/gearboxData';
 import { environment } from 'src/environments/environment'
+import { UserData } from '../models/userData';
 
 @Injectable({
   providedIn: 'root'
@@ -76,7 +77,11 @@ export class AuthService {
   verifyGearbox(gearboxData: GearboxData): Observable<unknown> {
     return this.http.post(`${this.baseUrl}/verify_gearbox`, gearboxData, this.httpOptions);
   }
-
+  
+  updateUser(userData: UserData, userID: number) {
+    return this.http.patch(`${this.baseUrl}/user/${userID}`, userData, this.httpOptions);
+  }
+  
   verifyUser(token: string) {
     return this.http.post(`${this.baseUrl}/confirm?token=${token}`, this.httpOptions);
   }

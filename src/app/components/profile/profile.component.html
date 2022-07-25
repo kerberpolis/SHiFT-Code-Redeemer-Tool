@@ -1,7 +1,42 @@
-<div *ngIf="user">
-    <span>Email: {{user.email}}</span><br/>
-    <span>Gearbox Email: {{user.gearbox_email}}</span>
+<div class='container' *ngIf="user">
+    <mat-card>
+        <mat-card-content>    
+            <h4>Profile <button mat-icon-button color='primary' (click)="openFeedbackDialog()">
+                    <mat-icon inline=true>feedback</mat-icon>
+                </button></h4>
+           
+            <div class='row'>
+                <div class='row-title'>Email</div>
+                <div class='row-container'>
+                    <div *ngIf='!editEmail'>
+                        <span>{{user.email}}</span>
+                    </div>
+                    <app-email-change *ngIf='editEmail' [user]="user"></app-email-change>
+
+                    <div class='button-container'>
+                        <button mat-raised-button color='primary' (click)="toggleEditEmail()">{{ editEmail ? 'Cancel' : 'Edit'}}</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class='row'>
+                <div class='row-title'>Gearbox Email</div>
+                <div class='row-container'>
+                    <div *ngIf='!editGearbox'>
+                        <span *ngIf='user.gearbox_email'>{{user.gearbox_email}}</span>
+                        <span *ngIf='!user.gearbox_email'>Gearbox details not set!</span>
+                    </div>
+                    <app-gearbox-verify *ngIf='editGearbox' [user]="user"></app-gearbox-verify>
+                    <div class='button-container'>
+                        <button mat-raised-button color='primary' (click)="toggleEditGearbox()">{{ editGearbox ? 'Cancel' : 'Edit'}}</button>
+                    </div>
+    
+                </div>
+            </div>
+        </mat-card-content>    
+    </mat-card>
+
+    <app-pw-change [user]="user"></app-pw-change>
 </div>
-<button mat-icon-button color='primary' (click)="openFeedbackDialog()">
-    <mat-icon inline=true>feedback</mat-icon>
-</button>
+
+
